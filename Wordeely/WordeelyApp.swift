@@ -13,7 +13,7 @@ struct WordeelyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TitleView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

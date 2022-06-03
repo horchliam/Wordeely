@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		333ED3D9283FDBB50004B327 /* WordeelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3D8283FDBB50004B327 /* WordeelyApp.swift */; };
-		333ED3DB283FDBB50004B327 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3DA283FDBB50004B327 /* ContentView.swift */; };
+		333ED3DB283FDBB50004B327 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3DA283FDBB50004B327 /* TitleView.swift */; };
 		333ED3DD283FDBB70004B327 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 333ED3DC283FDBB70004B327 /* Assets.xcassets */; };
 		333ED3E0283FDBB70004B327 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 333ED3DF283FDBB70004B327 /* Preview Assets.xcassets */; };
 		333ED3E2283FDBB70004B327 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3E1283FDBB70004B327 /* Persistence.swift */; };
@@ -16,6 +16,13 @@
 		333ED3EF283FDBB70004B327 /* WordeelyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3EE283FDBB70004B327 /* WordeelyTests.swift */; };
 		333ED3F9283FDBB70004B327 /* WordeelyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3F8283FDBB70004B327 /* WordeelyUITests.swift */; };
 		333ED3FB283FDBB70004B327 /* WordeelyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3FA283FDBB70004B327 /* WordeelyUITestsLaunchTests.swift */; };
+		333ED4082846BA6C0004B327 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED4072846BA6C0004B327 /* GameView.swift */; };
+		333ED40A2846BCC30004B327 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED4092846BCC30004B327 /* StoreView.swift */; };
+		333ED40C2846BDE10004B327 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED40B2846BDE10004B327 /* KeyboardView.swift */; };
+		333ED40E2846BE100004B327 /* GuessesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED40D2846BE100004B327 /* GuessesView.swift */; };
+		333ED4102846BE600004B327 /* TODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 333ED40F2846BE600004B327 /* TODO.rtf */; };
+		333ED4122847C1060004B327 /* Guess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED4112847C1060004B327 /* Guess.swift */; };
+		33F8198528490E2F00B54AA6 /* KeyboardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F8198428490E2F00B54AA6 /* KeyboardKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +45,7 @@
 /* Begin PBXFileReference section */
 		333ED3D5283FDBB50004B327 /* Wordeely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wordeely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		333ED3D8283FDBB50004B327 /* WordeelyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordeelyApp.swift; sourceTree = "<group>"; };
-		333ED3DA283FDBB50004B327 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		333ED3DA283FDBB50004B327 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		333ED3DC283FDBB70004B327 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		333ED3DF283FDBB70004B327 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		333ED3E1283FDBB70004B327 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -48,6 +55,13 @@
 		333ED3F4283FDBB70004B327 /* WordeelyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordeelyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		333ED3F8283FDBB70004B327 /* WordeelyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordeelyUITests.swift; sourceTree = "<group>"; };
 		333ED3FA283FDBB70004B327 /* WordeelyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordeelyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		333ED4072846BA6C0004B327 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		333ED4092846BCC30004B327 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
+		333ED40B2846BDE10004B327 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		333ED40D2846BE100004B327 /* GuessesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessesView.swift; sourceTree = "<group>"; };
+		333ED40F2846BE600004B327 /* TODO.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = TODO.rtf; sourceTree = "<group>"; };
+		333ED4112847C1060004B327 /* Guess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guess.swift; sourceTree = "<group>"; };
+		33F8198428490E2F00B54AA6 /* KeyboardKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,12 +112,14 @@
 		333ED3D7283FDBB50004B327 /* Wordeely */ = {
 			isa = PBXGroup;
 			children = (
+				333ED4142847C8750004B327 /* Models */,
+				333ED4132847C86E0004B327 /* Views */,
 				333ED3D8283FDBB50004B327 /* WordeelyApp.swift */,
-				333ED3DA283FDBB50004B327 /* ContentView.swift */,
 				333ED3DC283FDBB70004B327 /* Assets.xcassets */,
 				333ED3E1283FDBB70004B327 /* Persistence.swift */,
 				333ED3E3283FDBB70004B327 /* Wordeely.xcdatamodeld */,
 				333ED3DE283FDBB70004B327 /* Preview Content */,
+				333ED40F2846BE600004B327 /* TODO.rtf */,
 			);
 			path = Wordeely;
 			sourceTree = "<group>";
@@ -131,6 +147,27 @@
 				333ED3FA283FDBB70004B327 /* WordeelyUITestsLaunchTests.swift */,
 			);
 			path = WordeelyUITests;
+			sourceTree = "<group>";
+		};
+		333ED4132847C86E0004B327 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				333ED40D2846BE100004B327 /* GuessesView.swift */,
+				333ED40B2846BDE10004B327 /* KeyboardView.swift */,
+				333ED4092846BCC30004B327 /* StoreView.swift */,
+				333ED4072846BA6C0004B327 /* GameView.swift */,
+				333ED3DA283FDBB50004B327 /* TitleView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		333ED4142847C8750004B327 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				333ED4112847C1060004B327 /* Guess.swift */,
+				33F8198428490E2F00B54AA6 /* KeyboardKey.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +276,7 @@
 			files = (
 				333ED3E0283FDBB70004B327 /* Preview Assets.xcassets in Resources */,
 				333ED3DD283FDBB70004B327 /* Assets.xcassets in Resources */,
+				333ED4102846BE600004B327 /* TODO.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,8 +303,14 @@
 			files = (
 				333ED3E5283FDBB70004B327 /* Wordeely.xcdatamodeld in Sources */,
 				333ED3E2283FDBB70004B327 /* Persistence.swift in Sources */,
-				333ED3DB283FDBB50004B327 /* ContentView.swift in Sources */,
+				33F8198528490E2F00B54AA6 /* KeyboardKey.swift in Sources */,
+				333ED40C2846BDE10004B327 /* KeyboardView.swift in Sources */,
+				333ED3DB283FDBB50004B327 /* TitleView.swift in Sources */,
 				333ED3D9283FDBB50004B327 /* WordeelyApp.swift in Sources */,
+				333ED4122847C1060004B327 /* Guess.swift in Sources */,
+				333ED40A2846BCC30004B327 /* StoreView.swift in Sources */,
+				333ED40E2846BE100004B327 /* GuessesView.swift in Sources */,
+				333ED4082846BA6C0004B327 /* GameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

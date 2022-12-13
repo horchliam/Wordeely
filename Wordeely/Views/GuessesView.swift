@@ -8,42 +8,77 @@
 import SwiftUI
 
 struct GuessesView: View {
-    @Binding var guesses: [Guess]
+    @EnvironmentObject var game: GameController
 
     var body: some View {
-        List(guesses) {
-            guess in GuessRow(guess: guess)
-        }
-    }
-}
-
-struct GuessRow: View {
-    var guess: Guess
-    var body: some View {
-        HStack {
-            ForEach(Array(guess.text), id: \.self) { letter in
-                GuessCell(letter: String(letter))
-                    .frame(maxWidth: .infinity)
+        ScrollView {
+            // Look up how this works lol
+            // Answer from:
+            // https://stackoverflow.com/questions/58376681/swiftui-automatically-scroll-to-bottom-in-scrollview-bottom-first
+            ScrollViewReader { value in
+                ForEach(0..<game.letters.count, id: \.self) { i in
+                    GuessRow(curRow: i).environmentObject(game)
+                }
+                .onChange(of: game.letters.count) { _ in
+                    value.scrollTo(game.letters.count - 1)
+                }
             }
         }
     }
 }
 
-struct GuessCell: View {
-    var letter: String
+struct GuessLetterCell: View {
+    var letter: Character?
+    
     var body: some View {
-        Text(letter)
-            .padding(10)
-            .foregroundColor(.black)
-            .font(.title)
-            .border(Color.black, width: 5)
-            .cornerRadius(10)
+        ZStack {
+            Rectangle()
+                .frame(maxWidth: .infinity)
+                .aspectRatio(1, contentMode: .fit)
+                .foregroundColor(Color.white)
+                .border(.black, width: 4)
+            Text(String(letter ?? " "))
+        }
     }
 }
 
+struct GuessAnswerCell: View {
+    var score: (Int?, Int?)
+    
+    var body: some View {
+        ZStack {
+            Rectangle()
+                .frame(maxWidth: .infinity)
+                .aspectRatio(1, contentMode: .fit)
+                .foregroundColor(Color.white)
+            Text(score.1 != nil ? "\(score.0!)/\(score.1!)" : "-/-")
+                .font(.system(size: 25))
+        }
+    }
+}
+
+struct GuessRow: View {
+    var curRow: Int
+    @EnvironmentObject var game: GameController
+    
+    var body: some View {
+        HStack {
+            // These out of bounds checks are odd
+            // I do not know what the issue is but it might be a concurrency thing
+            ForEach(0..<5) { i in
+                (curRow < game.scores.count) ?
+                GuessLetterCell(letter: game.letters[curRow][i]) :
+                GuessLetterCell(letter: nil)
+            }
+            (curRow < game.scores.count) ?
+            GuessAnswerCell(score: game.scores[curRow]) :
+            GuessAnswerCell(score: (nil, nil))
+        }
+    }
+}
 
 struct GuessesView_Previews: PreviewProvider {
     static var previews: some View {
-        GuessesView(guesses: .constant([Guess(text: "TESTS")]))
+        GuessesView().environmentObject(GameController())
     }
 }

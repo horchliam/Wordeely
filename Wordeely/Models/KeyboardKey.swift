@@ -9,5 +9,5 @@ import Foundation
 
 struct KeyboardKey: Identifiable {
     let id: UUID = UUID()
-    var letter: String
+    var letter: Character
 }

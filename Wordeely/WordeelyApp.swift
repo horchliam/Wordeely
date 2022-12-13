@@ -9,12 +9,16 @@ import SwiftUI
 
 @main
 struct WordeelyApp: App {
+    @StateObject var game: GameController = GameController()
     let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
-            TitleView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            MainView()
+                .environmentObject(game)
+//            TitleView()
+//                .environmentObject(game)
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

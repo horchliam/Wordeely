@@ -8,18 +8,21 @@
 import SwiftUI
 
 struct GameView: View {
-    @Binding var guesses: [Guess]
+    @EnvironmentObject var game: GameController
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        VStack {
-            GuessesView(guesses: $guesses)
-            KeyboardView(guesses: $guesses)
+        VStack(spacing: 20) {
+            GuessesView().environmentObject(game)
+                .padding(10)
+            KeyboardView().environmentObject(game)
+                .padding(.bottom, 40)
         }
     }
 }
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {
-        GameView(guesses: .constant([Guess(text: "TESTS")]))
+        GameView().environmentObject(GameController())
     }
 }

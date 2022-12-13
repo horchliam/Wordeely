@@ -14,7 +14,66 @@
 [X] Create game scroll view (6/1)\
 [X] Link keyboard and game scroll views\
 	[ ] Add ability to type entire words, submit, and then move on to the next\
+[ ] Clean up entire project, draw inspiration from https://quickbirdstudios.com/blog/wordle-game-swiftui/\
+	[X] Clean up guesses view\
+	[ ] Clean up keys and keyboard\
 \
 Next up:\
 [ ] Implement game logic\
-[ ] Set up store view (again, placeholder assets for now)}
+[ ] Remember a game's fun comes from how it manipulates the emotions of the player\
+[ ] Set up store view (again, placeholder assets for now)\
+\
+^\
+|\
+|\
+Relic, I use below lists now (6/9)\
+\
+Queue In Order of Importance...\
+- Make git repo (so I can work at work)\
+- Find and channel visual inspiration\
+- Implement animations (game-ify)\
+	- look this up (think i need to put animation on a certain thread?)\
+	- Old words fade out in choppy fashion when a new game is started\
+	- Score increments to desired new score (in lerp fashion)\
+	- Cells react when you tap them (choppy jiggle)\
+	- Certain buttons randomly jiggle\
+	- Add vibrations\
+- Get definition of correct word in pop up\
+- Polish\
+	- Clean code\
+	- Pick a uniform font\
+	- Colors?\
+\
+Extra...\
+- Classic Wordeely\
+	- Achieved through the use of some algorithm\
+- Wordeely of the day\
+	- Achieved through the use of a server\
+- Progress of user over the course of a week, perhaps even a month\
+- Add friends and compete\
+- Unlockable characters\
+	- Walks atop the top bar view\
+\
+Log...\
+(6/9)	Implement game logic\
+(6/11) 	I have decided to take a break from Wordeely. It is far too annoying to figure out how to fix the layout. If I ever return to the game I will read up on how to get the layout I want, until then...\
+	Emotion had taken me over. I now know I must narrow the scope of the app, and abandon the borrowed code of MatrixGrid.\
+	Abandoned MatrixGrid.\
+(6/12) 	Wordeely logic implemented. A bug arose that evades me, index is out of bounds immediately after a correct guess had been made and at least one incorrect guess was already made. Temporarily solved this with an index check.\
+(6/16) 	Returned from Florida vacation\
+	Fixed keyboard layout\
+	Scroll view scrolls immediately to most recent guess\
+	Removed navigation bar dead space\
+	Fixed look of guess answer cell\
+(6/19) 	Returned from Chincoteague\
+	Abandoned idea of custom navigation bar\
+(6/20)	Custom back button added (https://stackoverflow.com/questions/56571349/custom-back-button-for-navigationviews-navigation-bar-in-swiftui)\
+	Desired word randomly generated\
+	Points UI added and stored in user defaults\
+	Decided to drop store concept\
+	Rough tab bar implemented (https://betterprogramming.pub/create-a-sidebar-menu-180ca218eaf2)\
+(6/21)	Tab bar cleaned up\
+(6/23)	Simple pop up implemented\
+	GameController becoming more of a flow coordinator\
+	Putting Wordeely on pause officially, I will return to the app next month and work on it casually here and there. The lessons I've learned thus far have been invaluable, and the lessons to come will change me forever. Wordeely, I am grateful for you, and I am not done with you, I plan to have you out by the end of the year.\
+	}

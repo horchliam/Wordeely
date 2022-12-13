@@ -12,7 +12,7 @@ struct GameView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 5) {
             GuessesView().environmentObject(game)
                 .padding(10)
             KeyboardView().environmentObject(game)

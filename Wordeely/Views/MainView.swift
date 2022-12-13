@@ -36,7 +36,7 @@ struct MainView: View {
                 }
             }
         }) {
-            VStack {
+            VStack(spacing: 0) {
                 MyTabBarView(showSideBar: $showSideBar, points: $game.score)
                     .frame(height: 50)
                 SideBarView(sidebarWidth: 150, showSidebar: $showSideBar, sidebar:
@@ -46,7 +46,7 @@ struct MainView: View {
                             Rectangle()
                                 .aspectRatio(2, contentMode: .fit)
                                 .foregroundColor(Color.white)
-                                .border(.black, width: 4)
+                                .border(.black, width: 2)
                             Button(action: {curView = .Main}) {
                                 Text("Play")
                             }.buttonStyle(PlainButtonStyle())
@@ -55,7 +55,7 @@ struct MainView: View {
                             Rectangle()
                                 .aspectRatio(2, contentMode: .fit)
                                 .foregroundColor(Color.white)
-                                .border(.black, width: 4)
+                                .border(.black, width: 2)
                             Button(action: {curView = .HowTo}) {
                                 Text("How To")
                             }.buttonStyle(PlainButtonStyle())
@@ -88,7 +88,7 @@ struct MyTabBarView: View {
                 Text("=")
                     .font(.system(size: 25))
                     .frame(width: 50, height: 50)
-                    .border(.black, width: 4)
+                    .border(.black, width: 2)
             }.buttonStyle(PlainButtonStyle())
             Text("")
                 .frame(maxWidth: .infinity)
@@ -103,6 +103,6 @@ struct MyTabBarView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(showSideBar: true).environmentObject(GameController())
     }
 }

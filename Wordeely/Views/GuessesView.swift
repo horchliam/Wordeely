@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GuessesView: View {
     @EnvironmentObject var game: GameController
-
+    
     var body: some View {
         ScrollView {
             // Look up how this works lol
@@ -23,6 +23,7 @@ struct GuessesView: View {
                     value.scrollTo(game.letters.count - 1)
                 }
             }
+            .padding(5)
         }
     }
 }
@@ -36,7 +37,12 @@ struct GuessLetterCell: View {
                 .frame(maxWidth: .infinity)
                 .aspectRatio(1, contentMode: .fit)
                 .foregroundColor(Color.white)
-                .border(.black, width: 4)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.black, lineWidth: 2)
+                )
+            //                .cornerRadius(10)
+            //                .border(.black, width: 2)
             Text(String(letter ?? " "))
         }
     }

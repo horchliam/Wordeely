@@ -6,7 +6,10 @@
 //
 
 import SwiftUI
-
+/// This one wasn't stolen, this was just an idea for a store page where you could
+/// buy avatars. Ditched that idea.
+///
+/// No longer used, here for history sake.
 struct StoreView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var score: Int

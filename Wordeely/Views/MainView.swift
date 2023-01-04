@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+// Enum of views, used by SideBarView to figure out what to display
 enum ViewType {
     case Main, HowTo
 }

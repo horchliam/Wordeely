@@ -50,7 +50,8 @@ class GameController: ObservableObject {
     @Published var score: Int = UserDefaults.standard.integer(forKey: "Score")
     // Dummy place holder value
     var solution: String = "HAPPY"
-    var scrambledLetters: [[Character]] = [[Character]]()
+    var scrambledLetters: [[Character?]] = [[Character?]]()
+    let scrambleLength: Int = 18
     
     init(width: Int = 5, height: Int = 1) {
         self.width = width
@@ -77,8 +78,9 @@ class GameController: ObservableObject {
     }
     // Pick a new random word and reset the guesses
     func newGame() {
-        solution = words.randomElement()!.uppercased()
-        scrambledLetters = scrambleLetters()
+        solution = words.randomElement()!.lowercased()
+        let temp = scrambleLetters()
+        scrambledLetters = [Array(temp[0..<scrambleLength/3]), Array(temp[scrambleLength/3..<2*scrambleLength/3]), Array(temp[2*scrambleLength/3..<scrambleLength])]
         print("The word is \(solution)")
         row = 0
         col = 0
@@ -89,11 +91,26 @@ class GameController: ObservableObject {
         scores = [(nil, nil)]
     }
     // Scramble the possible letters to use
-    func scrambleLetters() -> [[Character]] {
-        var result: [[Character]] = Array(
-            repeating: .init(repeating: "x", count: 6),
-            count: 2
+    func scrambleLetters() -> [Character?] {
+        var result: [Character?] = Array(
+            repeating: nil,
+            count: scrambleLength
         )
+        let cc: CharacterCollection = CharacterCollection()
+        var index = Int.random(in: 0..<scrambleLength)
+        for c in solution {
+            if(cc.letters.contains(c)) {
+                while(result[index] != nil) {
+                    index = Int.random(in: 0..<scrambleLength)
+                }
+                result[index] = cc.pop(c: c)
+            }
+        }
+        for i in 0..<result.count {
+            if(result[i] == nil) {
+                result[i] = cc.getRandom()
+            }
+        }
         
         return result
     }
@@ -152,7 +169,6 @@ class GameController: ObservableObject {
         }
         
         scores[row] = toAddToScores
-        print(scores)
         
         if toAddToScores.1 == 5 {
             return true

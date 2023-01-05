@@ -34,6 +34,7 @@
 		75373EAC296619E900B74CB9 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75373EAB296619E900B74CB9 /* ColorExtension.swift */; };
 		75373EAF2966207F00B74CB9 /* MyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75373EAE2966207F00B74CB9 /* MyColors.swift */; };
 		75373ECB29672A7600B74CB9 /* MinimalistKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75373ECA29672A7600B74CB9 /* MinimalistKeyboardView.swift */; };
+		758980ED2967362C00AB8347 /* CharacterCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758980EC2967362C00AB8347 /* CharacterCollection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		75373EAB296619E900B74CB9 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		75373EAE2966207F00B74CB9 /* MyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColors.swift; sourceTree = "<group>"; };
 		75373ECA29672A7600B74CB9 /* MinimalistKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalistKeyboardView.swift; sourceTree = "<group>"; };
+		758980EC2967362C00AB8347 /* CharacterCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		330D7CBB286221A400E628E1 /* Artifacts */ = {
 			isa = PBXGroup;
 			children = (
+				33F8198428490E2F00B54AA6 /* KeyboardKey.swift */,
 				75373EA82965DA9100B74CB9 /* DebugView.swift */,
 				333ED40B2846BDE10004B327 /* KeyboardView.swift */,
 				33F81986284F82D400B54AA6 /* LetterTile.swift */,
@@ -203,7 +206,6 @@
 		333ED4142847C8750004B327 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				33F8198428490E2F00B54AA6 /* KeyboardKey.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				33F8198B2850E2DE00B54AA6 /* GameController.swift */,
+				758980EC2967362C00AB8347 /* CharacterCollection.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				758980ED2967362C00AB8347 /* CharacterCollection.swift in Sources */,
 				333ED3E5283FDBB70004B327 /* Wordeely.xcdatamodeld in Sources */,
 				330D7CBA2861534C00E628E1 /* MainView.swift in Sources */,
 				33F8198C2850E2DE00B54AA6 /* GameController.swift in Sources */,

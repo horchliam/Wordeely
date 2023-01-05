@@ -23,8 +23,8 @@ struct MinimalistKeyboardView: View {
                                     .foregroundColor(MyColors.primary1)
                                     .cornerRadius(15)
                                     .shadow(color: .gray, radius: 0, x: 2, y: 2)
-                                Button(action: { game.keyPressed(letter)}) {
-                                    Text(String(letter))
+                                Button(action: { game.keyPressed(letter ?? " ")}) {
+                                    Text(String(letter ?? " "))
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }

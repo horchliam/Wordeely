@@ -22,39 +22,41 @@ struct DebugView: View {
 
 struct DebugKeyboardView: View {
     @EnvironmentObject var game: GameController
-    var letters: [[Character]] = [["a", "b", "c", "e", "f"], ["g", "h", "i", "j", "k"]]
     
     var body: some View {
         ZStack {
             VStack {
-                ForEach(letters, id:\.self) { row in
+                ForEach(game.scrambledLetters, id:\.self) { row in
                     HStack {
                         ForEach(row, id:\.self) { letter in
                             ZStack {
                                 Rectangle()
                                     .frame(maxWidth: .infinity)
                                     .aspectRatio(1, contentMode: .fit)
-                                    .foregroundColor(Color.white)
+                                    .foregroundColor(MyColors.primary1)
                                     .cornerRadius(15)
                                     .shadow(color: .gray, radius: 0, x: 2, y: 2)
                                 Button(action: { game.keyPressed(letter)}) {
                                     Text(String(letter))
                                 }
+                                .buttonStyle(PlainButtonStyle())
                             }
                         }
                     }
                 }
             }
         }
-        .padding(20)
-        .background(MyColors.primary1)
-        .cornerRadius(15)
-        .padding(20)
+        .padding(10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
+        )
+        .padding(10)
     }
 }
 
 struct DebugView_Previews: PreviewProvider {
     static var previews: some View {
-        DebugView()
+        DebugView().environmentObject(GameController())
     }
 }

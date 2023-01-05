@@ -10,4 +10,5 @@ import SwiftUI
 
 class MyColors {
     static var primary1: Color = Color(hex: 0xADD8E6)
+    static var primary2: Color = Color(hex: 0xE6BBAD)
 }

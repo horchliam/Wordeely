@@ -10,12 +10,11 @@ import SwiftUI
 enum ViewType: String, CaseIterable {
     case Main = "Play"
     case HowTo = "How To"
-    case Debug = "Debug"
+//    case Debug = "Debug"
 }
 
 struct MainView: View {
     @EnvironmentObject var game: GameController
-    @State var showSideBar: Bool = false
     @State var curView: ViewType = .Main
     
     var body: some View {
@@ -39,9 +38,7 @@ struct MainView: View {
             }
         }) {
             VStack(spacing: 0) {
-                MyTabBarView(showSideBar: $showSideBar, points: $game.score)
-                    .frame(height: 50)
-                SideBarView(sidebarWidth: 150, showSidebar: $showSideBar, sidebar:
+                SideBarView(sidebarWidth: 150, showSidebar: $game.showSidebar, sidebar:
                 {
                     VStack(spacing: 10) {
                         ForEach(ViewType.allCases, id:\.self) { value in
@@ -57,17 +54,22 @@ struct MainView: View {
                         Spacer()
                     }
                 }, content: {
-                    switch curView {
-                    case .Main:
-                        GameView().environmentObject(game)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    case .HowTo:
-                        HowToView()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .padding(10)
-                    case .Debug:
-                        DebugView().environmentObject(game)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    VStack(spacing: 0) {
+                        MyTabBarView(showSideBar: $game.showSidebar, points: $game.score)
+                            .environmentObject(game)
+                            .frame(height: 50)
+                        switch curView {
+                        case .Main:
+                            GameView().environmentObject(game)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        case .HowTo:
+                            HowToView()
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .padding(10)
+    //                    case .Debug:
+    //                        DebugView().environmentObject(game)
+    //                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
                     }
                 })
             }
@@ -76,12 +78,15 @@ struct MainView: View {
 }
 
 struct MyTabBarView: View {
+    @EnvironmentObject var game: GameController
     @Binding var showSideBar: Bool
     @Binding var points: Int
     
     var body: some View {
         HStack {
-            Button(action: {showSideBar = !showSideBar }) {
+            Button(action: {
+                game.showSidebar = true
+            }) {
                 Text("=")
                     .font(.system(size: 25))
                     .frame(width: 50, height: 50)
@@ -101,6 +106,6 @@ struct MyTabBarView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(showSideBar: true).environmentObject(GameController())
+        MainView().environmentObject(GameController())
     }
 }

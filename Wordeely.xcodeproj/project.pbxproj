@@ -33,6 +33,7 @@
 		75373EA92965DA9100B74CB9 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75373EA82965DA9100B74CB9 /* DebugView.swift */; };
 		75373EAC296619E900B74CB9 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75373EAB296619E900B74CB9 /* ColorExtension.swift */; };
 		75373EAF2966207F00B74CB9 /* MyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75373EAE2966207F00B74CB9 /* MyColors.swift */; };
+		75373ECB29672A7600B74CB9 /* MinimalistKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75373ECA29672A7600B74CB9 /* MinimalistKeyboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		75373EA82965DA9100B74CB9 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		75373EAB296619E900B74CB9 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		75373EAE2966207F00B74CB9 /* MyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColors.swift; sourceTree = "<group>"; };
+		75373ECA29672A7600B74CB9 /* MinimalistKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalistKeyboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,8 @@
 		330D7CBB286221A400E628E1 /* Artifacts */ = {
 			isa = PBXGroup;
 			children = (
+				75373EA82965DA9100B74CB9 /* DebugView.swift */,
+				333ED40B2846BDE10004B327 /* KeyboardView.swift */,
 				33F81986284F82D400B54AA6 /* LetterTile.swift */,
 				33F81988284F898E00B54AA6 /* MatrixGrid.swift */,
 				333ED3DA283FDBB50004B327 /* TitleView.swift */,
@@ -192,7 +196,6 @@
 				33F8198D2855214700B54AA6 /* SideBarView.swift */,
 				330D7CB92861534B00E628E1 /* MainView.swift */,
 				334C7004286369A000E5DB8D /* HowToView.swift */,
-				75373EA82965DA9100B74CB9 /* DebugView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -218,8 +221,8 @@
 			children = (
 				3379314D2864BD1E00482049 /* PopUpView.swift */,
 				333ED4072846BA6C0004B327 /* GameView.swift */,
-				333ED40B2846BDE10004B327 /* KeyboardView.swift */,
 				333ED40D2846BE100004B327 /* GuessesView.swift */,
+				75373ECA29672A7600B74CB9 /* MinimalistKeyboardView.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				333ED40E2846BE100004B327 /* GuessesView.swift in Sources */,
 				33F81989284F898E00B54AA6 /* MatrixGrid.swift in Sources */,
 				33F8198E2855214700B54AA6 /* SideBarView.swift in Sources */,
+				75373ECB29672A7600B74CB9 /* MinimalistKeyboardView.swift in Sources */,
 				333ED4082846BA6C0004B327 /* GameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

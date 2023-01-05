@@ -12,9 +12,6 @@ struct GuessesView: View {
     
     var body: some View {
         ScrollView {
-            // Look up how this works lol
-            // Answer from:
-            // https://stackoverflow.com/questions/58376681/swiftui-automatically-scroll-to-bottom-in-scrollview-bottom-first
             ScrollViewReader { value in
                 ForEach(0..<game.letters.count, id: \.self) { i in
                     GuessRow(curRow: i).environmentObject(game)
@@ -36,14 +33,14 @@ struct GuessLetterCell: View {
             Rectangle()
                 .frame(maxWidth: .infinity)
                 .aspectRatio(1, contentMode: .fit)
-                .foregroundColor(Color.clear)
+                .foregroundColor((letter == nil) ? Color.clear : MyColors.primary1)
+                .cornerRadius(10)
                 .overlay(
+                    letter == nil ?
                     RoundedRectangle(cornerRadius: 10)
                         .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [5]))
-//                        .stroke(Color.black, lineWidth: 2)
+                    : nil
                 )
-            //                .cornerRadius(10)
-            //                .border(.black, width: 2)
             Text(String(letter ?? " "))
         }
     }
@@ -70,8 +67,6 @@ struct GuessRow: View {
     
     var body: some View {
         HStack {
-            // These out of bounds checks are odd
-            // I do not know what the issue is but it might be a concurrency thing
             ForEach(0..<5) { i in
                 (curRow < game.scores.count) ?
                 GuessLetterCell(letter: game.letters[curRow][i]) :

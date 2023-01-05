@@ -112,6 +112,7 @@
 		330D7CBB286221A400E628E1 /* Artifacts */ = {
 			isa = PBXGroup;
 			children = (
+				33F81986284F82D400B54AA6 /* LetterTile.swift */,
 				33F81988284F898E00B54AA6 /* MatrixGrid.swift */,
 				333ED3DA283FDBB50004B327 /* TitleView.swift */,
 				333ED4092846BCC30004B327 /* StoreView.swift */,
@@ -216,7 +217,6 @@
 			isa = PBXGroup;
 			children = (
 				3379314D2864BD1E00482049 /* PopUpView.swift */,
-				33F81986284F82D400B54AA6 /* LetterTile.swift */,
 				333ED4072846BA6C0004B327 /* GameView.swift */,
 				333ED40B2846BDE10004B327 /* KeyboardView.swift */,
 				333ED40D2846BE100004B327 /* GuessesView.swift */,

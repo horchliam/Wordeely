@@ -45,10 +45,6 @@ struct PopUpView<PopUpContent: View, MainContent: View>: View {
                     }
                         .animation(Animation.easeInOut.speed(2))
                 )
-//                .opacity(showPopUp ? 0.5 : 1)
-//                .onTapGesture {
-//                    self.showPopUp = false
-//                }
             popUpContent
                 .frame(width: popUpWidth, height: popUpWidth * 1.5, alignment: .center)
                 .offset(x: showPopUp ? 0 : -2 * popUpWidth, y: 0)

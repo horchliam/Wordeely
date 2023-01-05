@@ -48,7 +48,7 @@ struct MainView: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 15)
                                     .aspectRatio(2, contentMode: .fit)
-                                    .foregroundColor(Color(hex: MyColors.lightBlue))
+                                    .foregroundColor(MyColors.primary1)
                                 Button(action: {curView = value}) {
                                     Text(value.rawValue)
                                 }.buttonStyle(PlainButtonStyle())
@@ -66,7 +66,7 @@ struct MainView: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .padding(10)
                     case .Debug:
-                        DebugView()
+                        DebugView().environmentObject(game)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                 })

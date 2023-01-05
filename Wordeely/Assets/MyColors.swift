@@ -6,7 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
 
 class MyColors {
-    static var lightBlue: UInt = 0xADD8E6
+    static var primary1: Color = Color(hex: 0xADD8E6)
 }

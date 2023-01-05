@@ -33,8 +33,6 @@ struct LetterTile: View {
             }
         }
     }
-    
-    
 }
 
 private extension LetterEvaluation {

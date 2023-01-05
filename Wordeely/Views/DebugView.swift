@@ -8,17 +8,20 @@
 import SwiftUI
 
 struct DebugView: View {
+    @EnvironmentObject var game: GameController
+    
     var body: some View {
         VStack(spacing: 5) {
-            GuessesView().environmentObject(GameController())
+            GuessesView().environmentObject(game)
                 .padding(10)
-            DebugKeyboardView()
+            DebugKeyboardView().environmentObject(game)
                 .padding(.bottom, 40)
         }
     }
 }
 
 struct DebugKeyboardView: View {
+    @EnvironmentObject var game: GameController
     var letters: [[Character]] = [["a", "b", "c", "e", "f"], ["g", "h", "i", "j", "k"]]
     
     var body: some View {
@@ -34,7 +37,9 @@ struct DebugKeyboardView: View {
                                     .foregroundColor(Color.white)
                                     .cornerRadius(15)
                                     .shadow(color: .gray, radius: 0, x: 2, y: 2)
-                                Text(String(letter))
+                                Button(action: { game.keyPressed(letter)}) {
+                                    Text(String(letter))
+                                }
                             }
                         }
                     }
@@ -42,7 +47,7 @@ struct DebugKeyboardView: View {
             }
         }
         .padding(20)
-        .background(Color(hex: MyColors.lightBlue))
+        .background(MyColors.primary1)
         .cornerRadius(15)
         .padding(20)
     }

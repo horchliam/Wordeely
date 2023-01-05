@@ -43,6 +43,7 @@ struct GuessLetterCell: View {
                     : nil
                 )
             Text(String(letter ?? " "))
+                .font(.custom("ChalkboardSE-Light", size: 15))
         }
     }
 }
@@ -61,6 +62,7 @@ struct GuessAnswerCell: View {
                         .cornerRadius(10)
                         .shadow(color: (score.0 == nil) ? .clear : .gray, radius: 0, x: 2, y: 2)
                     Text(score.0 != nil ? "\(score.0!)" : "")
+                        .font(.custom("ChalkboardSE-Light", size: 15))
                         .foregroundColor(.black)
                 }
                 Spacer()
@@ -79,6 +81,7 @@ struct GuessAnswerCell: View {
                         .cornerRadius(10)
                         .shadow(color: (score.0 == nil) ? .clear : .gray, radius: 0, x: 2, y: 2)
                     Text(score.1 != nil ? "\(score.1!)" : "")
+                        .font(.custom("ChalkboardSE-Light", size: 15))
                         .foregroundColor(.black)
                 }
             }
@@ -101,7 +104,7 @@ struct GuessRow: View {
                 GuessLetterCell(letter: nil)
             }
             (curRow < game.scores.count) ?
-            GuessAnswerCell(score: game.scores[curRow]) :
+            GuessAnswerCell(score: (game.scores[curRow])) :
             GuessAnswerCell(score: (nil, nil))
         }
         .onTapGesture {

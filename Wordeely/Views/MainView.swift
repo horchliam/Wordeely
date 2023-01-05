@@ -48,6 +48,7 @@ struct MainView: View {
                                     .foregroundColor(MyColors.primary1)
                                 Button(action: {curView = value}) {
                                     Text(value.rawValue)
+                                        .font(.custom("ChalkboardSE-Light", size: 20))
                                 }.buttonStyle(PlainButtonStyle())
                             }
                         }

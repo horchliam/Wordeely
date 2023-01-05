@@ -14,11 +14,13 @@ struct WordeelyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainView()
-                .environmentObject(game)
-//            TitleView()
-//                .environmentObject(game)
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ZStack {
+                // Background color
+                Color(hex: 0xE6BBAD).ignoresSafeArea()
+                
+                MainView()
+                    .environmentObject(game)
+            }
         }
     }
 }

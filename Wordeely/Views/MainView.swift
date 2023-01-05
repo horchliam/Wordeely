@@ -7,8 +7,10 @@
 
 import SwiftUI
 
-enum ViewType {
-    case Main, HowTo
+enum ViewType: String, CaseIterable {
+    case Main = "Play"
+    case HowTo = "How To"
+    case Debug = "Debug"
 }
 
 struct MainView: View {
@@ -42,23 +44,15 @@ struct MainView: View {
                 SideBarView(sidebarWidth: 150, showSidebar: $showSideBar, sidebar:
                 {
                     VStack(spacing: 10) {
-                        ZStack {
-                            Rectangle()
-                                .aspectRatio(2, contentMode: .fit)
-                                .foregroundColor(Color.white)
-                                .border(.black, width: 2)
-                            Button(action: {curView = .Main}) {
-                                Text("Play")
-                            }.buttonStyle(PlainButtonStyle())
-                        }
-                        ZStack {
-                            Rectangle()
-                                .aspectRatio(2, contentMode: .fit)
-                                .foregroundColor(Color.white)
-                                .border(.black, width: 2)
-                            Button(action: {curView = .HowTo}) {
-                                Text("How To")
-                            }.buttonStyle(PlainButtonStyle())
+                        ForEach(ViewType.allCases, id:\.self) { value in
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .aspectRatio(2, contentMode: .fit)
+                                    .foregroundColor(Color(hex: MyColors.lightBlue))
+                                Button(action: {curView = value}) {
+                                    Text(value.rawValue)
+                                }.buttonStyle(PlainButtonStyle())
+                            }
                         }
                         Spacer()
                     }
@@ -71,6 +65,9 @@ struct MainView: View {
                         HowToView()
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .padding(10)
+                    case .Debug:
+                        DebugView()
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                 })
             }
@@ -88,13 +85,14 @@ struct MyTabBarView: View {
                 Text("=")
                     .font(.system(size: 25))
                     .frame(width: 50, height: 50)
-                    .border(.black, width: 2)
+                    .background(Color.clear)
             }.buttonStyle(PlainButtonStyle())
             Text("")
                 .frame(maxWidth: .infinity)
             Text("Points: \(points)")
                 .font(.system(size: 20))
                 .frame(minWidth: 100)
+                .hidden()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))

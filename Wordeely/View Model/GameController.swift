@@ -7,14 +7,27 @@
 
 import Foundation
 import UIKit
-
+/* Game Structure Visualization...
+ 
+ Guesses are stored in 'letters' array...
+ [  [G,U,E,S,S],
+    [O,T,H,E,R],
+    [W,O,R,D,_] <- Current guess, col = 4 and row = 2
+ ]
+ 
+ Scores for each guess are stored in 'scores' array...
+ [  (1,2),
+    (3,3),
+    There is nothing here yet, guess is in progress, has not been evaluated
+ ]
+ */
 class GameController: ObservableObject {
     let width: Int
     var height: Int
     
     @Published var row: Int = 0
     private var col: Int = 0
-    
+
     private var words: [String] {
         if let path = Bundle.main.path(forResource: "Words", ofType: "txt") {
             do {
@@ -27,12 +40,14 @@ class GameController: ObservableObject {
         }
         return ["HAPPY"]
     }
-    
+    // Array of tuples representing how correct each guess was
     @Published var scores: [(Int?, Int?)] = [(Int?, Int?)]()
+    // An array of guesses
     @Published var letters: [[Character?]]
+    // Did ya win?
     @Published var win: Bool = false
     @Published var score: Int = UserDefaults.standard.integer(forKey: "Score")
-    // Implement a way to randomly select a 5 letter word
+    // Dummy place holder value
     var solution: String = "HAPPY"
     
     init(width: Int = 5, height: Int = 1) {
@@ -58,7 +73,7 @@ class GameController: ObservableObject {
         vibrate(type: .success)
         newGame()
     }
-    
+    // Pick a new random word and reset the guesses
     func newGame() {
         solution = words.randomElement()!.uppercased()
         print("The word is \(solution)")
@@ -70,7 +85,7 @@ class GameController: ObservableObject {
         )
         scores = [(nil, nil)]
     }
-    
+    // Add the pressed letter to the current guess
     func keyPressed(_ letter: Character) {
         guard col < 5 else {
             return
@@ -96,7 +111,7 @@ class GameController: ObservableObject {
         }
         col = 0
     }
-
+    // How correct was the word?
     func evaluate() -> Bool {
         var toAddToScores: (Int, Int) = (0, 0)
         var solArr: [Character?] = Array(solution)
@@ -129,7 +144,7 @@ class GameController: ObservableObject {
         }
         return false
     }
-    
+    // Delete the most recent letter from the current guess
     func backPressed() {
         guard col > 0 else {
             return

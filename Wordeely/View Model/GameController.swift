@@ -40,6 +40,7 @@ class GameController: ObservableObject {
         }
         return ["HAPPY"]
     }
+    @Published var showSidebar: Bool = false
     // Array of tuples representing how correct each guess was
     @Published var scores: [(Int?, Int?)] = [(Int?, Int?)]()
     // An array of guesses
@@ -49,6 +50,7 @@ class GameController: ObservableObject {
     @Published var score: Int = UserDefaults.standard.integer(forKey: "Score")
     // Dummy place holder value
     var solution: String = "HAPPY"
+    var scrambledLetters: [[Character]] = [[Character]]()
     
     init(width: Int = 5, height: Int = 1) {
         self.width = width
@@ -76,6 +78,7 @@ class GameController: ObservableObject {
     // Pick a new random word and reset the guesses
     func newGame() {
         solution = words.randomElement()!.uppercased()
+        scrambledLetters = scrambleLetters()
         print("The word is \(solution)")
         row = 0
         col = 0
@@ -85,6 +88,15 @@ class GameController: ObservableObject {
         )
         scores = [(nil, nil)]
     }
+    // Scramble the possible letters to use
+    func scrambleLetters() -> [[Character]] {
+        var result: [[Character]] = Array(
+            repeating: .init(repeating: "x", count: 6),
+            count: 2
+        )
+        
+        return result
+    }
     // Add the pressed letter to the current guess
     func keyPressed(_ letter: Character) {
         guard col < 5 else {
@@ -93,6 +105,9 @@ class GameController: ObservableObject {
         
         letters[row][col] = letter
         col = col + 1
+        if col == 5 {
+            submitPressed()
+        }
     }
     
     func submitPressed() {

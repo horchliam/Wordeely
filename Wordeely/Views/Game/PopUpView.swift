@@ -28,7 +28,7 @@ struct PopUpView<PopUpContent: View, MainContent: View>: View {
                 .overlay(
                     Group {
                         showPopUp ?
-                        Color.white
+                        MyColors.primary2
                             .ignoresSafeArea()
                             .opacity(0.5)
                             .onTapGesture {

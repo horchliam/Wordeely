@@ -24,7 +24,7 @@ struct WordeelyApp: App {
         WindowGroup {
             ZStack {
                 // Background color
-                Color(hex: 0xE6BBAD).ignoresSafeArea()
+                MyColors.primary2.ignoresSafeArea()
                 
                 MainView()
                     .environmentObject(game)

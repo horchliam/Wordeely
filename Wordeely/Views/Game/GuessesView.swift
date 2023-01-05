@@ -35,10 +35,11 @@ struct GuessLetterCell: View {
                 .aspectRatio(1, contentMode: .fit)
                 .foregroundColor((letter == nil) ? Color.clear : MyColors.primary1)
                 .cornerRadius(10)
+                .shadow(color: (letter == nil) ? .clear : .gray, radius: 0, x: 2, y: 2)
                 .overlay(
                     letter == nil ?
                     RoundedRectangle(cornerRadius: 10)
-                        .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [5]))
+                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
                     : nil
                 )
             Text(String(letter ?? " "))
@@ -75,6 +76,9 @@ struct GuessRow: View {
             (curRow < game.scores.count) ?
             GuessAnswerCell(score: game.scores[curRow]) :
             GuessAnswerCell(score: (nil, nil))
+        }
+        .onTapGesture {
+            game.backPressed()
         }
     }
 }

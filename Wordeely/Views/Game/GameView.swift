@@ -15,7 +15,7 @@ struct GameView: View {
         VStack(spacing: 5) {
             GuessesView().environmentObject(game)
                 .padding(10)
-            KeyboardView().environmentObject(game)
+            MinimalistKeyboardView().environmentObject(game)
                 .padding(.bottom, 40)
         }
     }

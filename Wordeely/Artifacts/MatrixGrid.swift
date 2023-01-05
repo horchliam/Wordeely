@@ -6,7 +6,11 @@
 //
 
 import SwiftUI
-
+/// I stole the view from a post I saw online. Made a few adjustments but as
+/// development continued it proved hurtful to not have a full understadning of these
+/// stolen views, so I ditched 'em and adopted my own.
+///
+/// No longer used, here for history sake.
 struct MatrixGrid<Content: View>: View {
     
     typealias GridItemFactory = (_ row: Int, _ column: Int) -> Content

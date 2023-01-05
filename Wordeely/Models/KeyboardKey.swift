@@ -8,6 +8,6 @@
 import Foundation
 
 struct KeyboardKey: Identifiable {
-    let id: UUID = UUID()
+    let id: UUID = UUID() // Unique identifier required for KeyboardKey
     var letter: Character
 }

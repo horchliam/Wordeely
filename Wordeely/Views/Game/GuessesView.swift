@@ -36,10 +36,11 @@ struct GuessLetterCell: View {
             Rectangle()
                 .frame(maxWidth: .infinity)
                 .aspectRatio(1, contentMode: .fit)
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.clear)
                 .overlay(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.black, lineWidth: 2)
+                        .strokeBorder(style: StrokeStyle(lineWidth: 2, dash: [5]))
+//                        .stroke(Color.black, lineWidth: 2)
                 )
             //                .cornerRadius(10)
             //                .border(.black, width: 2)
@@ -56,8 +57,8 @@ struct GuessAnswerCell: View {
             Rectangle()
                 .frame(maxWidth: .infinity)
                 .aspectRatio(1, contentMode: .fit)
-                .foregroundColor(Color.white)
-            Text(score.1 != nil ? "\(score.0!)/\(score.1!)" : "-/-")
+                .foregroundColor(Color.clear)
+            Text(score.1 != nil ? "\(score.0!) \(score.1!)" : "")
                 .font(.system(size: 25))
         }
     }

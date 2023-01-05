@@ -28,7 +28,7 @@ struct KeyboardView: View {
                         }) {
                             ZStack {
                                 Text("X")
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.clear)
                                     .aspectRatio(1, contentMode: .fit)
                                     .padding(13)
                                     .foregroundColor(.black)

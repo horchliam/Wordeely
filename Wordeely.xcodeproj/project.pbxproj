@@ -154,7 +154,6 @@
 				75373EAA296619D800B74CB9 /* Extensions */,
 				330D7CBB286221A400E628E1 /* Artifacts */,
 				33F8198A2850E2BD00B54AA6 /* View Model */,
-				333ED4142847C8750004B327 /* Models */,
 				333ED4132847C86E0004B327 /* Views */,
 				333ED3D8283FDBB50004B327 /* WordeelyApp.swift */,
 				333ED3DC283FDBB70004B327 /* Assets.xcassets */,
@@ -201,13 +200,6 @@
 				334C7004286369A000E5DB8D /* HowToView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		333ED4142847C8750004B327 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		33F8198A2850E2BD00B54AA6 /* View Model */ = {

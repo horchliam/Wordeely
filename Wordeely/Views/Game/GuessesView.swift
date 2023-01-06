@@ -33,17 +33,18 @@ struct GuessLetterCell: View {
             Rectangle()
                 .frame(maxWidth: .infinity)
                 .aspectRatio(1, contentMode: .fit)
-                .foregroundColor((letter == nil) ? Color.clear : MyColors.primary1)
+                .foregroundColor((letter == nil) ? Color.clear : MyColors.primary)
                 .cornerRadius(10)
-                .shadow(color: (letter == nil) ? .clear : .gray, radius: 0, x: 2, y: 2)
+                .shadow(color: (letter == nil) ? .clear : MyColors.shadow, radius: 0, x: 2, y: 2)
                 .overlay(
                     letter == nil ?
                     RoundedRectangle(cornerRadius: 10)
-                        .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                        .strokeBorder(MyColors.text, style: StrokeStyle(lineWidth: 1, dash: [5]))
                     : nil
                 )
             Text(String(letter ?? " "))
                 .font(.custom("ChalkboardSE-Light", size: 15))
+                .foregroundColor(MyColors.text)
         }
     }
 }
@@ -58,12 +59,12 @@ struct GuessAnswerCell: View {
                     Rectangle()
                         .frame(maxWidth: .infinity)
                         .aspectRatio(1, contentMode: .fit)
-                        .foregroundColor((score.0 == nil) ? Color.clear : MyColors.primary1)
+                        .foregroundColor((score.0 == nil) ? Color.clear : MyColors.primary)
                         .cornerRadius(10)
-                        .shadow(color: (score.0 == nil) ? .clear : .gray, radius: 0, x: 2, y: 2)
+                        .shadow(color: (score.0 == nil) ? .clear : MyColors.shadow, radius: 0, x: 2, y: 2)
                     Text(score.0 != nil ? "\(score.0!)" : "")
                         .font(.custom("ChalkboardSE-Light", size: 15))
-                        .foregroundColor(.black)
+                        .foregroundColor(MyColors.text)
                 }
                 Spacer()
                     .frame(maxWidth: .infinity)
@@ -77,12 +78,12 @@ struct GuessAnswerCell: View {
                     Rectangle()
                         .frame(maxWidth: .infinity)
                         .aspectRatio(1, contentMode: .fit)
-                        .foregroundColor((score.0 == nil) ? Color.clear : MyColors.primary1)
+                        .foregroundColor((score.0 == nil) ? Color.clear : MyColors.primary)
                         .cornerRadius(10)
-                        .shadow(color: (score.0 == nil) ? .clear : .gray, radius: 0, x: 2, y: 2)
+                        .shadow(color: (score.0 == nil) ? .clear : MyColors.shadow, radius: 0, x: 2, y: 2)
                     Text(score.1 != nil ? "\(score.1!)" : "")
                         .font(.custom("ChalkboardSE-Light", size: 15))
-                        .foregroundColor(.black)
+                        .foregroundColor(MyColors.text)
                 }
             }
         }

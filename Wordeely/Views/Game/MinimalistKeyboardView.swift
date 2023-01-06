@@ -20,12 +20,13 @@ struct MinimalistKeyboardView: View {
                                 Rectangle()
                                     .frame(maxWidth: .infinity)
                                     .aspectRatio(1, contentMode: .fit)
-                                    .foregroundColor(MyColors.primary1)
+                                    .foregroundColor(MyColors.primary)
                                     .cornerRadius(15)
-                                    .shadow(color: .gray, radius: 0, x: 2, y: 2)
+                                    .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
                                 Button(action: { game.keyPressed(letter ?? " ")}) {
                                     Text(String(letter ?? " "))
                                         .font(.custom("ChalkboardSE-Light", size: 15))
+                                        .foregroundColor(MyColors.text)
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }
@@ -37,7 +38,7 @@ struct MinimalistKeyboardView: View {
         .padding(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                .strokeBorder(MyColors.text ,style: StrokeStyle(lineWidth: 1, dash: [5]))
         )
         .padding(10)
     }

@@ -45,10 +45,11 @@ struct MainView: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 15)
                                     .aspectRatio(2, contentMode: .fit)
-                                    .foregroundColor(MyColors.primary1)
+                                    .foregroundColor(MyColors.secondary)
                                 Button(action: {curView = value}) {
                                     Text(value.rawValue)
                                         .font(.custom("ChalkboardSE-Light", size: 20))
+                                        .foregroundColor(MyColors.background)
                                 }.buttonStyle(PlainButtonStyle())
                             }
                         }
@@ -88,10 +89,10 @@ struct MyTabBarView: View {
             Button(action: {
                 game.showSidebar = true
             }) {
-                Text("=")
-                    .font(.system(size: 25))
-                    .frame(width: 50, height: 50)
-                    .background(Color.clear)
+                Circle()
+                    .frame(width: 35, height: 35)
+                    .foregroundColor(MyColors.secondary)
+                    .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
             }.buttonStyle(PlainButtonStyle())
             Text("")
                 .frame(maxWidth: .infinity)

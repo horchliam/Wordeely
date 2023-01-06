@@ -26,7 +26,7 @@ struct SideBarView<SidebarContent: View, Content: View>: View {
                 .overlay(
                     Group {
                         showSidebar ?
-                        MyColors.primary2
+                        MyColors.background
                             .ignoresSafeArea()
                             .opacity(0.5)
                             .onTapGesture {

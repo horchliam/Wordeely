@@ -33,9 +33,9 @@ struct DebugKeyboardView: View {
                                 Rectangle()
                                     .frame(maxWidth: .infinity)
                                     .aspectRatio(1, contentMode: .fit)
-                                    .foregroundColor(MyColors.primary1)
+                                    .foregroundColor(MyColors.primary)
                                     .cornerRadius(15)
-                                    .shadow(color: .gray, radius: 0, x: 2, y: 2)
+                                    .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
                                 Button(action: { game.keyPressed(letter ?? " ")}) {
                                     Text(String(letter ?? " "))
                                 }

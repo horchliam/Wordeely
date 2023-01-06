@@ -42,15 +42,18 @@ struct MainView: View {
                 {
                     VStack(spacing: 10) {
                         ForEach(ViewType.allCases, id:\.self) { value in
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .aspectRatio(2, contentMode: .fit)
-                                    .foregroundColor(MyColors.primary1)
-                                Button(action: {curView = value}) {
+                            Button(action: {
+                                curView = value
+                                game.showSidebar = false
+                            }) {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .aspectRatio(2, contentMode: .fit)
+                                        .foregroundColor(MyColors.primary1)
                                     Text(value.rawValue)
                                         .font(.custom("ChalkboardSE-Light", size: 20))
-                                }.buttonStyle(PlainButtonStyle())
-                            }
+                                }
+                            }.buttonStyle(PlainButtonStyle())
                         }
                         Spacer()
                     }

@@ -46,7 +46,7 @@ struct SideBarView<SidebarContent: View, Content: View>: View {
                 .frame(width: sidebarWidth, alignment: .center)
                 .offset(x: showSidebar ? 10 : -1 * sidebarWidth, y: 0)
                 .padding(.top, 10)
-                .animation(Animation.easeInOut.speed(1))
+                .animation(.interpolatingSpring(mass: 1, stiffness: 350, damping: 20, initialVelocity: 10))
         }
     }
 }

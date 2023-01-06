@@ -16,19 +16,20 @@ struct MinimalistKeyboardView: View {
                 ForEach(game.scrambledLetters, id:\.self) { row in
                     HStack {
                         ForEach(row, id:\.self) { letter in
-                            ZStack {
-                                Rectangle()
-                                    .frame(maxWidth: .infinity)
-                                    .aspectRatio(1, contentMode: .fit)
-                                    .foregroundColor(MyColors.primary1)
-                                    .cornerRadius(15)
-                                    .shadow(color: .gray, radius: 0, x: 2, y: 2)
-                                Button(action: { game.keyPressed(letter ?? " ")}) {
+                            
+                            Button(action: { game.keyPressed(letter ?? " ")}) {
+                                ZStack {
+                                    Rectangle()
+                                        .frame(maxWidth: .infinity)
+                                        .aspectRatio(1, contentMode: .fit)
+                                        .foregroundColor(MyColors.primary1)
+                                        .cornerRadius(15)
+                                        .shadow(color: .gray, radius: 0, x: 2, y: 2)
                                     Text(String(letter ?? " "))
                                         .font(.custom("ChalkboardSE-Light", size: 15))
                                 }
-                                .buttonStyle(PlainButtonStyle())
                             }
+                            .buttonStyle(ScaleButtonStyle())
                         }
                     }
                 }
@@ -40,6 +41,13 @@ struct MinimalistKeyboardView: View {
                 .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
         )
         .padding(10)
+    }
+}
+
+struct ScaleButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.9 : 1)
     }
 }
 

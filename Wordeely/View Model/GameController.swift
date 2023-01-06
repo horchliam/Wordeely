@@ -45,6 +45,7 @@ class GameController: ObservableObject {
     @Published var scores: [(Int?, Int?)] = [(Int?, Int?)]()
     // An array of guesses
     @Published var letters: [[Character?]]
+    @Published var opacity: [Double]
     // Did ya win?
     @Published var win: Bool = false
     @Published var score: Int = UserDefaults.standard.integer(forKey: "Score")
@@ -60,6 +61,7 @@ class GameController: ObservableObject {
             repeating: .init(repeating: nil, count: width),
             count: height
         )
+        opacity = [0.0]
         scores = [(nil, nil)]
         newGame()
     }
@@ -134,14 +136,19 @@ class GameController: ObservableObject {
         }
         
         if(!evaluate()) {
-            row = row + 1
-            let rowToAdd: [Character?] = .init(repeating: nil, count: width)
-            letters.append(rowToAdd)
-            scores.append((nil, nil))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                self.row = self.row + 1
+                let rowToAdd: [Character?] = .init(repeating: nil, count: self.width)
+                self.opacity.append(0.0)
+                self.letters.append(rowToAdd)
+                self.scores.append((nil, nil))
+                self.col = 0
+            }
         } else {
-            win = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                self.win = true
+            }
         }
-        col = 0
     }
     // How correct was the word?
     func evaluate() -> Bool {
@@ -168,7 +175,12 @@ class GameController: ObservableObject {
             }
         }
         
-        scores[row] = toAddToScores
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.scores[self.row].0 = toAddToScores.0
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            self.scores[self.row].1 = toAddToScores.1
+        }
         
         if toAddToScores.1 == 5 {
             return true

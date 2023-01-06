@@ -42,16 +42,30 @@ struct MainView: View {
                 {
                     VStack(spacing: 10) {
                         ForEach(ViewType.allCases, id:\.self) { value in
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .aspectRatio(2, contentMode: .fit)
-                                    .foregroundColor(MyColors.secondary)
-                                Button(action: {curView = value}) {
+                            Button(action: {
+                                curView = value
+                                game.showSidebar = false
+                            }) {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .aspectRatio(2, contentMode: .fit)
+                                        .foregroundColor(MyColors.primary)
                                     Text(value.rawValue)
                                         .font(.custom("ChalkboardSE-Light", size: 20))
-                                        .foregroundColor(MyColors.background)
-                                }.buttonStyle(PlainButtonStyle())
-                            }
+                                }
+                            }.buttonStyle(PlainButtonStyle())
+//=======
+//                            ZStack {
+//                                RoundedRectangle(cornerRadius: 15)
+//                                    .aspectRatio(2, contentMode: .fit)
+//                                    .foregroundColor(MyColors.secondary)
+//                                Button(action: {curView = value}) {
+//                                    Text(value.rawValue)
+//                                        .font(.custom("ChalkboardSE-Light", size: 20))
+//                                        .foregroundColor(MyColors.background)
+//                                }.buttonStyle(PlainButtonStyle())
+//                            }
+//>>>>>>> main
                         }
                         Spacer()
                     }

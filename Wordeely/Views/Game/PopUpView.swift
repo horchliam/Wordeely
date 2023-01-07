@@ -27,28 +27,21 @@ struct PopUpView<PopUpContent: View, MainContent: View>: View {
             mainContent
                 .overlay(
                     Group {
-                        showPopUp ?
-                        MyColors.background
-                            .ignoresSafeArea()
-                            .opacity(0.5)
-                            .onTapGesture {
-                                game.dismissWinView()
-                            }
-                        :
-                        Color.clear
-                            .ignoresSafeArea()
-                            .opacity(0)
-                            .onTapGesture {
-                                // pointless
-                                self.showPopUp = false
-                            }
+                        if(showPopUp) {
+                            MyColors.background
+                                .ignoresSafeArea()
+                                .opacity(0.5)
+                                .onTapGesture {
+                                    game.dismissWinView()
+                                }
+                        }
                     }
-                        .animation(Animation.easeInOut.speed(2))
+                        .animation(.default)
                 )
             popUpContent
-                .frame(width: popUpWidth, height: popUpWidth * 1.5, alignment: .center)
-                .offset(x: showPopUp ? 0 : -2 * popUpWidth, y: 0)
-                .animation(Animation.easeInOut.speed(1))
+                .frame(width: popUpWidth, height: popUpWidth, alignment: .center)
+                .scaleEffect(showPopUp ? 1 : 0)
+                .animation(.interpolatingSpring(mass: 1, stiffness: 350, damping: 20, initialVelocity: 10))
         }
     }
 }

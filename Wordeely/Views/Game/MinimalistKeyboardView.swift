@@ -25,16 +25,6 @@ struct MinimalistKeyboardView: View {
                                         .foregroundColor(MyColors.primary)
                                         .cornerRadius(15)
                                         .shadow(color: .gray, radius: 0, x: 2, y: 2)
-//=======
-//                            ZStack {
-//                                Rectangle()
-//                                    .frame(maxWidth: .infinity)
-//                                    .aspectRatio(1, contentMode: .fit)
-//                                    .foregroundColor(MyColors.primary)
-//                                    .cornerRadius(15)
-//                                    .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
-//                                Button(action: { game.keyPressed(letter ?? " ")}) {
-//>>>>>>> main
                                     Text(String(letter ?? " "))
                                         .font(.custom("ChalkboardSE-Light", size: 15))
                                         .foregroundColor(MyColors.text)

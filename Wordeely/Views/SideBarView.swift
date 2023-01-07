@@ -12,35 +12,29 @@ struct SideBarView<SidebarContent: View, Content: View>: View {
     let mainContent: Content
     let sidebarWidth: CGFloat
     @Binding var showSidebar: Bool
-        
+    
     init(sidebarWidth: CGFloat, showSidebar: Binding<Bool>, @ViewBuilder sidebar: ()->SidebarContent, @ViewBuilder content: ()->Content) {
         self.sidebarWidth = sidebarWidth
         self._showSidebar = showSidebar
         sidebarContent = sidebar()
         mainContent = content()
     }
-        
+    
     var body: some View {
         ZStack(alignment: .leading) {
             mainContent
                 .overlay(
                     Group {
-                        showSidebar ?
-                        MyColors.background
-                            .ignoresSafeArea()
-                            .opacity(0.5)
-                            .onTapGesture {
-                                showSidebar = false
-                            }
-                        :
-                        Color.clear
-                            .ignoresSafeArea()
-                            .opacity(0)
-                            .onTapGesture {
-                                showSidebar = false
-                            }
+                        if(showSidebar) {
+                            MyColors.background
+                                .ignoresSafeArea()
+                                .opacity(0.5)
+                                .onTapGesture {
+                                    showSidebar = false
+                                }
+                        }
                     }
-                        .animation(Animation.easeInOut.speed(2))
+                        .animation(.default)
                 )
             sidebarContent
                 .frame(width: sidebarWidth, alignment: .center)

@@ -19,23 +19,34 @@ struct MainView: View {
     
     var body: some View {
         PopUpView(200, $game.win, {
-            ZStack {
-                Rectangle()
-                    .frame(maxWidth: .infinity, maxHeight:.infinity)
-                    .foregroundColor(Color.white)
-                    .border(.black, width: 4)
                 VStack {
                     Text("The word was \(game.solution)!")
-                        .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
-                    // Spacer taking place of definition
+                        .font(.custom("ChalkboardSE-Light", size: 20))
+                        .fixedSize(horizontal: false, vertical: true)
+                        .foregroundColor(MyColors.text)
+                        .padding(20)
                     Spacer()
-                    Button(action: {game.dismissWinView()}) {
-                        Text("Gotchya")
-                            .frame(width: 200, height: 75)
-                            .border(.black, width: 4)
+                    Button(action: {
+                        game.dismissWinView()
+                    }) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .frame(height: 55)
+                                .frame(maxWidth: .infinity)
+                                .padding(20)
+                                .foregroundColor(MyColors.primary)
+                                .cornerRadius(15)
+                                .shadow(color: .gray, radius: 0, x: 2, y: 2)
+                            Text("Next Word")
+                                .font(.custom("ChalkboardSE-Light", size: 20))
+                                .foregroundColor(MyColors.text)
+                        }
                     }
                 }
-            }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 15)
+                        .strokeBorder(MyColors.text ,style: StrokeStyle(lineWidth: 1, dash: [5]))
+                )
         }) {
             VStack(spacing: 0) {
                 SideBarView(sidebarWidth: 150, showSidebar: $game.showSidebar, sidebar:
@@ -52,20 +63,9 @@ struct MainView: View {
                                         .foregroundColor(MyColors.primary)
                                     Text(value.rawValue)
                                         .font(.custom("ChalkboardSE-Light", size: 20))
+                                        .foregroundColor(MyColors.text)
                                 }
                             }.buttonStyle(PlainButtonStyle())
-//=======
-//                            ZStack {
-//                                RoundedRectangle(cornerRadius: 15)
-//                                    .aspectRatio(2, contentMode: .fit)
-//                                    .foregroundColor(MyColors.secondary)
-//                                Button(action: {curView = value}) {
-//                                    Text(value.rawValue)
-//                                        .font(.custom("ChalkboardSE-Light", size: 20))
-//                                        .foregroundColor(MyColors.background)
-//                                }.buttonStyle(PlainButtonStyle())
-//                            }
-//>>>>>>> main
                         }
                         Spacer()
                     }

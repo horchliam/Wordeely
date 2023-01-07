@@ -115,7 +115,7 @@ struct GuessAnswerCell: View {
                         .aspectRatio(1, contentMode: .fit)
                         .foregroundColor(MyColors.primary)
                         .cornerRadius(10)
-                        .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
+                        .shadow(color: .gray, radius: 0, x: 2, y: 2)
 //=======
 //                        .foregroundColor((score.0 == nil) ? Color.clear : MyColors.primary)
 //                        .cornerRadius(10)

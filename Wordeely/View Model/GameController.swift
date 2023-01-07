@@ -75,7 +75,6 @@ class GameController: ObservableObject {
         win = false
         score = score + 100
         UserDefaults.standard.set(score, forKey: "Score")
-        vibrate(type: .success)
         newGame()
     }
     // Pick a new random word and reset the guesses
@@ -146,6 +145,7 @@ class GameController: ObservableObject {
             }
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                self.vibrate(type: .success)
                 self.win = true
             }
         }

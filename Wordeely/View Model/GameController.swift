@@ -90,6 +90,7 @@ class GameController: ObservableObject {
             count: height
         )
         scores = [(nil, nil)]
+        opacity = [1.0]
     }
     // Scramble the possible letters to use
     func scrambleLetters() -> [Character?] {

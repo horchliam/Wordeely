@@ -19,34 +19,35 @@ struct MainView: View {
     
     var body: some View {
         PopUpView(200, $game.win, {
+            ZStack {
+                RoundedRectangle(cornerRadius: 15)
+                    .strokeBorder(MyColors.text ,style: StrokeStyle(lineWidth: 1, dash: [5]))
+                    .background(MyColors.background)
                 VStack {
-                    Text("The word was \(game.solution)!")
-                        .font(.custom("ChalkboardSE-Light", size: 20))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .foregroundColor(MyColors.text)
-                        .padding(20)
-                    Spacer()
-                    Button(action: {
-                        game.dismissWinView()
-                    }) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 15)
-                                .frame(height: 55)
-                                .frame(maxWidth: .infinity)
-                                .padding(20)
-                                .foregroundColor(MyColors.primary)
-                                .cornerRadius(15)
-                                .shadow(color: .gray, radius: 0, x: 2, y: 2)
-                            Text("Next Word")
-                                .font(.custom("ChalkboardSE-Light", size: 20))
-                                .foregroundColor(MyColors.text)
+                        Text("The word was \(game.solution)!")
+                            .font(.custom("ChalkboardSE-Light", size: 20))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .foregroundColor(MyColors.text)
+                            .padding(20)
+                        Spacer()
+                        Button(action: {
+                            game.dismissWinView()
+                        }) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .frame(height: 55)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(20)
+                                    .foregroundColor(MyColors.primary)
+                                    .cornerRadius(15)
+                                    .shadow(color: .gray, radius: 0, x: 2, y: 2)
+                                Text("Next Word")
+                                    .font(.custom("ChalkboardSE-Light", size: 20))
+                                    .foregroundColor(MyColors.text)
+                            }
                         }
-                    }
                 }
-                .overlay(
-                    RoundedRectangle(cornerRadius: 15)
-                        .strokeBorder(MyColors.text ,style: StrokeStyle(lineWidth: 1, dash: [5]))
-                )
+            }
         }) {
             VStack(spacing: 0) {
                 SideBarView(sidebarWidth: 150, showSidebar: $game.showSidebar, sidebar:

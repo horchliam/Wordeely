@@ -34,9 +34,9 @@ struct PopUpView<PopUpContent: View, MainContent: View>: View {
                                 .onTapGesture {
                                     game.dismissWinView()
                                 }
+                                .animation(.default)
                         }
                     }
-                        .animation(.default)
                 )
             popUpContent
                 .frame(width: popUpWidth, height: popUpWidth, alignment: .center)

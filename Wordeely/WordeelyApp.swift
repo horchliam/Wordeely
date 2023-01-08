@@ -17,7 +17,6 @@ import SwiftUI
 @main
 struct WordeelyApp: App {
     @StateObject var game: GameController = GameController()
-    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         // The start of the app

@@ -12,8 +12,6 @@
 		333ED3DB283FDBB50004B327 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3DA283FDBB50004B327 /* TitleView.swift */; };
 		333ED3DD283FDBB70004B327 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 333ED3DC283FDBB70004B327 /* Assets.xcassets */; };
 		333ED3E0283FDBB70004B327 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 333ED3DF283FDBB70004B327 /* Preview Assets.xcassets */; };
-		333ED3E2283FDBB70004B327 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3E1283FDBB70004B327 /* Persistence.swift */; };
-		333ED3E5283FDBB70004B327 /* Wordeely.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3E3283FDBB70004B327 /* Wordeely.xcdatamodeld */; };
 		333ED3EF283FDBB70004B327 /* WordeelyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3EE283FDBB70004B327 /* WordeelyTests.swift */; };
 		333ED3F9283FDBB70004B327 /* WordeelyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3F8283FDBB70004B327 /* WordeelyUITests.swift */; };
 		333ED3FB283FDBB70004B327 /* WordeelyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333ED3FA283FDBB70004B327 /* WordeelyUITestsLaunchTests.swift */; };
@@ -61,8 +59,6 @@
 		333ED3DA283FDBB50004B327 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		333ED3DC283FDBB70004B327 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		333ED3DF283FDBB70004B327 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		333ED3E1283FDBB70004B327 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		333ED3E4283FDBB70004B327 /* Wordeely.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Wordeely.xcdatamodel; sourceTree = "<group>"; };
 		333ED3EA283FDBB70004B327 /* WordeelyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordeelyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		333ED3EE283FDBB70004B327 /* WordeelyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordeelyTests.swift; sourceTree = "<group>"; };
 		333ED3F4283FDBB70004B327 /* WordeelyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WordeelyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +81,7 @@
 		75373EAB296619E900B74CB9 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		75373EAE2966207F00B74CB9 /* MyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColors.swift; sourceTree = "<group>"; };
 		75373ECA29672A7600B74CB9 /* MinimalistKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalistKeyboardView.swift; sourceTree = "<group>"; };
+		75546421296B712C00ECD864 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		758980EC2967362C00AB8347 /* CharacterCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +147,7 @@
 		333ED3D7283FDBB50004B327 /* Wordeely */ = {
 			isa = PBXGroup;
 			children = (
+				75546421296B712C00ECD864 /* Info.plist */,
 				75373EAD2966206B00B74CB9 /* Assets */,
 				75373EAA296619D800B74CB9 /* Extensions */,
 				330D7CBB286221A400E628E1 /* Artifacts */,
@@ -157,8 +155,6 @@
 				333ED4132847C86E0004B327 /* Views */,
 				333ED3D8283FDBB50004B327 /* WordeelyApp.swift */,
 				333ED3DC283FDBB70004B327 /* Assets.xcassets */,
-				333ED3E1283FDBB70004B327 /* Persistence.swift */,
-				333ED3E3283FDBB70004B327 /* Wordeely.xcdatamodeld */,
 				333ED3DE283FDBB70004B327 /* Preview Content */,
 				333ED40F2846BE600004B327 /* TODO.rtf */,
 				33F819972860D3B300B54AA6 /* Words.txt */,
@@ -371,11 +367,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				758980ED2967362C00AB8347 /* CharacterCollection.swift in Sources */,
-				333ED3E5283FDBB70004B327 /* Wordeely.xcdatamodeld in Sources */,
 				330D7CBA2861534C00E628E1 /* MainView.swift in Sources */,
 				33F8198C2850E2DE00B54AA6 /* GameController.swift in Sources */,
 				75373EAC296619E900B74CB9 /* ColorExtension.swift in Sources */,
-				333ED3E2283FDBB70004B327 /* Persistence.swift in Sources */,
 				334C7005286369A100E5DB8D /* HowToView.swift in Sources */,
 				33F8198528490E2F00B54AA6 /* KeyboardKey.swift in Sources */,
 				75373EAF2966207F00B74CB9 /* MyColors.swift in Sources */,
@@ -552,9 +546,9 @@
 				DEVELOPMENT_TEAM = XH7F8TV6LS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Wordeely/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
@@ -582,9 +576,9 @@
 				DEVELOPMENT_TEAM = XH7F8TV6LS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Wordeely/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
@@ -717,19 +711,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		333ED3E3283FDBB70004B327 /* Wordeely.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				333ED3E4283FDBB70004B327 /* Wordeely.xcdatamodel */,
-			);
-			currentVersion = 333ED3E4283FDBB70004B327 /* Wordeely.xcdatamodel */;
-			path = Wordeely.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 333ED3CD283FDBB50004B327 /* Project object */;
 }

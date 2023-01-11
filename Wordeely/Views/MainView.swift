@@ -7,117 +7,142 @@
 
 import SwiftUI
 
-enum ViewType: String, CaseIterable {
-    case Main = "Play"
-    case HowTo = "How To"
-//    case Debug = "Debug"
+enum ViewType: CaseIterable {
+    case Main
+    case HowTo
+}
+
+enum Difficulty: String, CaseIterable{
+    case Easy = "Easy"
+    case Medium = "Medium"
+    case Hard = "Hard"
 }
 
 struct MainView: View {
     @EnvironmentObject var game: GameController
     @State var curView: ViewType = .Main
+    @State var showSubTabBar: Bool = false
     
     var body: some View {
-        PopUpView(200, $game.win, {
+        PopUpView(300, $game.win, {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)
                     .strokeBorder(MyColors.text ,style: StrokeStyle(lineWidth: 1, dash: [5]))
                     .background(MyColors.background)
                 VStack {
-                        Text("The word was \(game.solution)!")
-                            .font(.custom("ChalkboardSE-Light", size: 20))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .foregroundColor(MyColors.text)
-                            .padding(20)
-                        Spacer()
-                        Button(action: {
-                            game.dismissWinView()
-                        }) {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 15)
-                                    .frame(height: 55)
-                                    .frame(maxWidth: .infinity)
-                                    .padding(20)
-                                    .foregroundColor(MyColors.primary)
-                                    .cornerRadius(15)
-                                    .shadow(color: .gray, radius: 0, x: 2, y: 2)
-                                Text("Next Word")
-                                    .font(.custom("ChalkboardSE-Light", size: 20))
-                                    .foregroundColor(MyColors.text)
-                            }
+                    Text("The word was \(game.solution)!")
+                        .font(.custom("ChalkboardSE-Light", size: 30))
+                        .minimumScaleFactor(0.5)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .foregroundColor(MyColors.text)
+                        .padding(20)
+                    Spacer()
+                    Button(action: {
+                        game.dismissWinView()
+                    }) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .frame(height: 55)
+                                .frame(maxWidth: .infinity)
+                                .padding(20)
+                                .foregroundColor(MyColors.primary)
+                                .cornerRadius(15)
+                                .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
+                            Text("Next Word")
+                                .font(.custom("ChalkboardSE-Light", size: 30))
+                                .minimumScaleFactor(0.5)
+                                .foregroundColor(MyColors.text)
                         }
+                    }
                 }
             }
         }) {
             VStack(spacing: 0) {
                 SideBarView(sidebarWidth: 150, showSidebar: $game.showSidebar, sidebar:
-                {
+                                {
                     VStack(spacing: 10) {
-                        ForEach(ViewType.allCases, id:\.self) { value in
-                            Button(action: {
-                                curView = value
-                                game.showSidebar = false
-                            }) {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 15)
-                                        .aspectRatio(2, contentMode: .fit)
-                                        .foregroundColor(MyColors.primary)
-                                    Text(value.rawValue)
-                                        .font(.custom("ChalkboardSE-Light", size: 20))
-                                        .foregroundColor(MyColors.text)
+                        Button(action: {
+                            showSubTabBar = !showSubTabBar
+                        }) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .aspectRatio(2, contentMode: .fit)
+                                    .foregroundColor(MyColors.primary)
+                                Text("Play")
+                                    .font(.custom("ChalkboardSE-Light", size: 30))
+                                    .minimumScaleFactor(0.5)
+                                    .foregroundColor(MyColors.text)
+                            }
+                        }.buttonStyle(ScaleButtonStyle())
+                        
+                        if(showSubTabBar) {
+                            VStack(spacing: 10) {
+                                ForEach(Difficulty.allCases, id:\.self) { value in
+                                    Button(action: {
+                                        curView = .Main
+                                        if(game.difficulty != value) {
+                                            game.difficulty = value
+                                            game.newGame()
+                                        }
+                                        game.showSidebar = false
+                                        showSubTabBar = false
+                                    }) {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .foregroundColor(MyColors.primary)
+                                            Text(value.rawValue)
+                                                .font(.custom("ChalkboardSE-Light", size: 25))
+                                                .minimumScaleFactor(0.5)
+                                                .foregroundColor(MyColors.text)
+                                        }
+                                        .frame(maxHeight: .infinity)
+                                    }
+                                    .buttonStyle(ScaleButtonStyle())
                                 }
-                            }.buttonStyle(PlainButtonStyle())
+                            }
+                            .padding(.horizontal, 20)
+                            .frame(height: 150)
                         }
+                        
+                        Button(action: {
+                            curView = .HowTo
+                            game.showSidebar = false
+                            showSubTabBar = false
+                        }) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .aspectRatio(2, contentMode: .fit)
+                                    .foregroundColor(MyColors.primary)
+                                Text("How To")
+                                    .font(.custom("ChalkboardSE-Light", size: 30))
+                                    .minimumScaleFactor(0.5)
+                                    .foregroundColor(MyColors.text)
+                            }
+                        }.buttonStyle(ScaleButtonStyle())
                         Spacer()
                     }
                 }, content: {
                     VStack(spacing: 0) {
-                        MyTabBarView(showSideBar: $game.showSidebar, points: $game.score)
+                        MyTabBarView(showSideBar: $game.showSidebar)
                             .environmentObject(game)
                             .frame(height: 50)
-                        switch curView {
-                        case .Main:
-                            GameView().environmentObject(game)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        case .HowTo:
-                            HowToView()
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .padding(10)
-    //                    case .Debug:
-    //                        DebugView().environmentObject(game)
-    //                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        HStack {
+                            Spacer()
+                            switch curView {
+                            case .Main:
+                                GameView().environmentObject(game)
+                                    .frame(maxWidth: 600, maxHeight: .infinity)
+                            case .HowTo:
+                                HowToView()
+                                    .frame(maxWidth: 600, maxHeight: .infinity)
+                                    .padding(10)
+                            }
+                            Spacer()
                         }
                     }
                 })
             }
         }.environmentObject(game)
-    }
-}
-
-struct MyTabBarView: View {
-    @EnvironmentObject var game: GameController
-    @Binding var showSideBar: Bool
-    @Binding var points: Int
-    
-    var body: some View {
-        HStack {
-            Button(action: {
-                game.showSidebar = true
-            }) {
-                Circle()
-                    .frame(width: 35, height: 35)
-                    .foregroundColor(MyColors.secondary)
-                    .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
-            }.buttonStyle(PlainButtonStyle())
-            Text("")
-                .frame(maxWidth: .infinity)
-            Text("Points: \(points)")
-                .font(.system(size: 20))
-                .frame(minWidth: 100)
-                .hidden()
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
     }
 }
 

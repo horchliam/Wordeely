@@ -32,6 +32,8 @@
 		75373EAC296619E900B74CB9 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75373EAB296619E900B74CB9 /* ColorExtension.swift */; };
 		75373EAF2966207F00B74CB9 /* MyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75373EAE2966207F00B74CB9 /* MyColors.swift */; };
 		75373ECB29672A7600B74CB9 /* MinimalistKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75373ECA29672A7600B74CB9 /* MinimalistKeyboardView.swift */; };
+		7554642B296DFF0B00ECD864 /* MyTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7554642A296DFF0B00ECD864 /* MyTabBarView.swift */; };
+		7554642E296E027900ECD864 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7554642D296E027900ECD864 /* ViewModifiers.swift */; };
 		758980ED2967362C00AB8347 /* CharacterCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758980EC2967362C00AB8347 /* CharacterCollection.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +84,8 @@
 		75373EAE2966207F00B74CB9 /* MyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColors.swift; sourceTree = "<group>"; };
 		75373ECA29672A7600B74CB9 /* MinimalistKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimalistKeyboardView.swift; sourceTree = "<group>"; };
 		75546421296B712C00ECD864 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7554642A296DFF0B00ECD864 /* MyTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarView.swift; sourceTree = "<group>"; };
+		7554642D296E027900ECD864 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		758980EC2967362C00AB8347 /* CharacterCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,6 +151,7 @@
 		333ED3D7283FDBB50004B327 /* Wordeely */ = {
 			isa = PBXGroup;
 			children = (
+				7554642C296E026300ECD864 /* View Modifiers */,
 				75546421296B712C00ECD864 /* Info.plist */,
 				75373EAD2966206B00B74CB9 /* Assets */,
 				75373EAA296619D800B74CB9 /* Extensions */,
@@ -194,6 +199,7 @@
 				33F8198D2855214700B54AA6 /* SideBarView.swift */,
 				330D7CB92861534B00E628E1 /* MainView.swift */,
 				334C7004286369A000E5DB8D /* HowToView.swift */,
+				7554642A296DFF0B00ECD864 /* MyTabBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -232,6 +238,14 @@
 				75373EAE2966207F00B74CB9 /* MyColors.swift */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		7554642C296E026300ECD864 /* View Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				7554642D296E027900ECD864 /* ViewModifiers.swift */,
+			);
+			path = "View Modifiers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,10 +390,12 @@
 				333ED40C2846BDE10004B327 /* KeyboardView.swift in Sources */,
 				333ED3DB283FDBB50004B327 /* TitleView.swift in Sources */,
 				333ED3D9283FDBB50004B327 /* WordeelyApp.swift in Sources */,
+				7554642B296DFF0B00ECD864 /* MyTabBarView.swift in Sources */,
 				3379314E2864BD1E00482049 /* PopUpView.swift in Sources */,
 				33F81987284F82D400B54AA6 /* LetterTile.swift in Sources */,
 				333ED40A2846BCC30004B327 /* StoreView.swift in Sources */,
 				75373EA92965DA9100B74CB9 /* DebugView.swift in Sources */,
+				7554642E296E027900ECD864 /* ViewModifiers.swift in Sources */,
 				333ED40E2846BE100004B327 /* GuessesView.swift in Sources */,
 				33F81989284F898E00B54AA6 /* MatrixGrid.swift in Sources */,
 				33F8198E2855214700B54AA6 /* SideBarView.swift in Sources */,
@@ -549,8 +565,8 @@
 				INFOPLIST_FILE = Wordeely/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -579,8 +595,8 @@
 				INFOPLIST_FILE = Wordeely/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

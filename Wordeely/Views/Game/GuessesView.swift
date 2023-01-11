@@ -23,7 +23,9 @@ struct GuessesView: View {
                         }
                 }
                 .onChange(of: game.letters.count) { _ in
-                    value.scrollTo(game.letters.count - 1)
+                    withAnimation {
+                        value.scrollTo(game.letters.count - 1)
+                    }
                 }
             }
             .padding(5)
@@ -38,11 +40,11 @@ struct GuessLetterCell: View {
         ZStack {
             filledCell
                 .scaleEffect((letter == nil) ? 0 : 1)
-                .animation(.interpolatingSpring(mass: 1, stiffness: 350, damping: 20, initialVelocity: 10), value: letter)
+                .animation(.interpolatingSpring(mass: 1, stiffness: 350, damping: (letter == nil) ? 50 : 20, initialVelocity: 10), value: letter)
             Group {
                 letter == nil ?
                 RoundedRectangle(cornerRadius: 10)
-                    .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                    .strokeBorder(MyColors.text, style: StrokeStyle(lineWidth: 1, dash: [5]))
                 : nil
             }
         }
@@ -53,11 +55,7 @@ extension GuessLetterCell {
     var filledCell: some View {
         ZStack {
             Rectangle()
-                .frame(maxWidth: .infinity)
-                .aspectRatio(1, contentMode: .fit)
-                .foregroundColor(MyColors.primary)
-                .cornerRadius(10)
-                .shadow(color: .gray, radius: 0, x: 2, y: 2)
+                .modifier(RoundedButton())
             Text(String(letter ?? " "))
                 .font(.custom("ChalkboardSE-Light", size: 15))
                 .foregroundColor(MyColors.text)
@@ -71,45 +69,37 @@ struct GuessAnswerCell: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack{
-                ZStack {
-                    Rectangle()
-                        .frame(maxWidth: .infinity)
-                        .aspectRatio(1, contentMode: .fit)
-                        .foregroundColor(MyColors.primary)
-                        .cornerRadius(10)
-                        .shadow(color: .gray, radius: 0, x: 2, y: 2)
-                    Text(score.0 != nil ? "\(score.0!)" : "")
-                        .font(.custom("ChalkboardSE-Light", size: 15))
-                        .foregroundColor(MyColors.text)
-                }
+                GuessAnswerCellNumber(score: score.0)
                 Spacer()
                     .frame(maxWidth: .infinity)
                     .aspectRatio(1, contentMode: .fit)
             }
-            .scaleEffect((score.0 == nil) ? 0 : 1)
-            .animation(.interpolatingSpring(mass: 1, stiffness: 350, damping: 20, initialVelocity: 10), value: score.0)
             HStack{
                 Spacer()
                     .frame(maxWidth: .infinity)
                     .aspectRatio(1, contentMode: .fit)
-                ZStack {
-                    Rectangle()
-                        .frame(maxWidth: .infinity)
-                        .aspectRatio(1, contentMode: .fit)
-                        .foregroundColor(MyColors.primary)
-                        .cornerRadius(10)
-                        .shadow(color: .gray, radius: 0, x: 2, y: 2)
-                    Text(score.1 != nil ? "\(score.1!)" : "")
-                        .font(.custom("ChalkboardSE-Light", size: 15))
-                        .foregroundColor(MyColors.text)
-                }
+                GuessAnswerCellNumber(score: score.1)
             }
-            .scaleEffect((score.1 == nil) ? 0 : 1)
-            .animation(.interpolatingSpring(mass: 1, stiffness: 350, damping: 20, initialVelocity: 10), value: score.1)
         }
         .frame(maxWidth: .infinity)
         .aspectRatio(1, contentMode: .fit)
         .foregroundColor(Color.clear)
+    }
+}
+
+struct GuessAnswerCellNumber: View {
+    var score: Int?
+    
+    var body: some View {
+        ZStack {
+            Rectangle()
+                .modifier(RoundedButton())
+            Text(score != nil ? "\(score!)" : "")
+                .font(.custom("ChalkboardSE-Light", size: 15))
+                .foregroundColor(MyColors.text)
+        }
+        .scaleEffect((score == nil) ? 0 : 1)
+        .animation(.interpolatingSpring(mass: 1, stiffness: 350, damping: 20, initialVelocity: 10), value: score)
     }
 }
 
@@ -129,6 +119,7 @@ struct GuessRow: View {
             GuessAnswerCell(score: (game.scores[curRow])) :
             GuessAnswerCell(score: (nil, nil))
         }
+        .frame(maxWidth: 600)
         .onTapGesture {
             game.backPressed()
         }

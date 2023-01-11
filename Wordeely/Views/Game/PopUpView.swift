@@ -40,8 +40,10 @@ struct PopUpView<PopUpContent: View, MainContent: View>: View {
                 )
             popUpContent
                 .frame(width: popUpWidth, height: popUpWidth, alignment: .center)
+                .cornerRadius(15)
                 .scaleEffect(showPopUp ? 1 : 0)
                 .animation(.interpolatingSpring(mass: 1, stiffness: 350, damping: 20, initialVelocity: 10))
+                .opacity(showPopUp ? 1 : 0) // Disable if not shown
         }
     }
 }

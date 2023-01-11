@@ -16,15 +16,10 @@ struct MinimalistKeyboardView: View {
                 ForEach(game.scrambledLetters, id:\.self) { row in
                     HStack {
                         ForEach(row, id:\.self) { letter in
-                            
                             Button(action: { game.keyPressed(letter ?? " ")}) {
                                 ZStack {
                                     Rectangle()
-                                        .frame(maxWidth: .infinity)
-                                        .aspectRatio(1, contentMode: .fit)
-                                        .foregroundColor(MyColors.primary)
-                                        .cornerRadius(15)
-                                        .shadow(color: .gray, radius: 0, x: 2, y: 2)
+                                        .modifier(RoundedButton())
                                     Text(String(letter ?? " "))
                                         .font(.custom("ChalkboardSE-Light", size: 15))
                                         .foregroundColor(MyColors.text)

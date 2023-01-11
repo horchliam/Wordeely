@@ -31,11 +31,7 @@ struct DebugKeyboardView: View {
                         ForEach(row, id:\.self) { letter in
                             ZStack {
                                 Rectangle()
-                                    .frame(maxWidth: .infinity)
-                                    .aspectRatio(1, contentMode: .fit)
-                                    .foregroundColor(MyColors.primary)
-                                    .cornerRadius(15)
-                                    .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
+                                    .modifier(RoundedButton())
                                 Button(action: { game.keyPressed(letter ?? " ")}) {
                                     Text(String(letter ?? " "))
                                 }

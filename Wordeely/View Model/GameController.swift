@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+
 /* Game Structure Visualization...
  
  Guesses are stored in 'letters' array...
@@ -40,6 +41,9 @@ class GameController: ObservableObject {
         }
         return ["HAPPY"]
     }
+    
+    private var editable: Bool = true
+    
     @Published var showSidebar: Bool = false
     // Array of tuples representing how correct each guess was
     @Published var scores: [(Int?, Int?)] = [(Int?, Int?)]()
@@ -52,7 +56,17 @@ class GameController: ObservableObject {
     // Dummy place holder value
     var solution: String = "HAPPY"
     var scrambledLetters: [[Character?]] = [[Character?]]()
-    let scrambleLength: Int = 18
+    var difficulty: Difficulty = .Medium
+    var scrambleLength: Int {
+        switch difficulty {
+        case .Easy:
+            return 12
+        case .Medium:
+            return 18
+        case .Hard:
+            return 24
+        }
+    }
     
     init(width: Int = 5, height: Int = 1) {
         self.width = width
@@ -77,11 +91,13 @@ class GameController: ObservableObject {
         UserDefaults.standard.set(score, forKey: "Score")
         newGame()
     }
+    
     // Pick a new random word and reset the guesses
     func newGame() {
         solution = words.randomElement()!.lowercased()
         let temp = scrambleLetters()
-        scrambledLetters = [Array(temp[0..<scrambleLength/3]), Array(temp[scrambleLength/3..<2*scrambleLength/3]), Array(temp[2*scrambleLength/3..<scrambleLength])]
+//        scrambledLetters = [Array(temp[0..<scrambleLength/3]), Array(temp[scrambleLength/3..<2*scrambleLength/3]), Array(temp[2*scrambleLength/3..<scrambleLength])]
+        scrambledLetters = formatArray(temp)
         print("The word is \(solution)")
         row = 0
         col = 0
@@ -92,6 +108,22 @@ class GameController: ObservableObject {
         scores = [(nil, nil)]
         opacity = [1.0]
     }
+    
+    func formatArray(_ input: [Character?]) -> [[Character?]] {
+        var res = [[Character?]]()
+        var temp = [Character?]()
+        
+        for i in 0..<input.count/6 {
+            temp = [Character?]()
+            for j in 0..<6 {
+                temp.append(input[i*6 + j])
+            }
+            res.append(temp)
+        }
+        
+        return res
+    }
+    
     // Scramble the possible letters to use
     func scrambleLetters() -> [Character?] {
         var result: [Character?] = Array(
@@ -116,6 +148,7 @@ class GameController: ObservableObject {
         
         return result
     }
+    
     // Add the pressed letter to the current guess
     func keyPressed(_ letter: Character) {
         guard col < 5 else {
@@ -125,6 +158,7 @@ class GameController: ObservableObject {
         letters[row][col] = letter
         col = col + 1
         if col == 5 {
+            editable = false
             submitPressed()
         }
     }
@@ -143,14 +177,17 @@ class GameController: ObservableObject {
                 self.letters.append(rowToAdd)
                 self.scores.append((nil, nil))
                 self.col = 0
+                self.editable = true
             }
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
                 self.vibrate(type: .success)
                 self.win = true
+                self.editable = true
             }
         }
     }
+    
     // How correct was the word?
     func evaluate() -> Bool {
         var toAddToScores: (Int, Int) = (0, 0)
@@ -188,9 +225,10 @@ class GameController: ObservableObject {
         }
         return false
     }
+    
     // Delete the most recent letter from the current guess
     func backPressed() {
-        guard col > 0 else {
+        guard col > 0  && editable else {
             return
         }
         

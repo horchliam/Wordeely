@@ -9,8 +9,8 @@ import SwiftUI
 
 struct HowToView: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .center, spacing: 10) {
+            VStack(alignment: .leading, spacing: 6) {
                 Text("Rules")
                     .foregroundColor(MyColors.text)
                     .font(.custom("ChalkboardSE-Bold", size: 25))
@@ -25,13 +25,14 @@ struct HowToView: View {
                 .foregroundColor(MyColors.text)
                 .fixedSize(horizontal: false, vertical: true)
             }
+            .frame(maxWidth: .infinity)
             .padding(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .strokeBorder(MyColors.text ,style: StrokeStyle(lineWidth: 1, dash: [5]))
             )
             .padding(.horizontal, 10)
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 6) {
                 Text("Example")
                     .foregroundColor(MyColors.text)
                     .font(.custom("ChalkboardSE-Bold", size: 25))
@@ -50,6 +51,7 @@ struct HowToView: View {
                     .foregroundColor(MyColors.text)
                     .font(.custom("ChalkboardSE-Light", size: 15))
             }
+            .frame(maxWidth: .infinity)
             .padding(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)

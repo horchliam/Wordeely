@@ -21,8 +21,7 @@ struct MyTabBarView: View {
                     .foregroundColor(MyColors.secondary)
                     .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
             }.buttonStyle(ScaleButtonStyle())
-            Text("")
-                .frame(maxWidth: .infinity)
+            Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))

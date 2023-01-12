@@ -80,6 +80,7 @@ struct MainView: View {
                                         curView = .Main
                                         if(game.difficulty != value) {
                                             game.difficulty = value
+                                            UserDefaults.standard.set(value.rawValue, forKey: "Difficulty")
                                             game.newGame()
                                         }
                                         game.showSidebar = false

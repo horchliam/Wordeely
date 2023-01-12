@@ -24,15 +24,14 @@ struct MainView: View {
     @State var showSubTabBar: Bool = false
     
     var body: some View {
-        PopUpView(300, $game.win, {
+        PopUpView(200, $game.win, {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)
                     .strokeBorder(MyColors.text ,style: StrokeStyle(lineWidth: 1, dash: [5]))
                     .background(MyColors.background)
                 VStack {
                     Text("The word was \(game.solution)!")
-                        .font(.custom("ChalkboardSE-Light", size: 30))
-                        .minimumScaleFactor(0.5)
+                        .font(.custom("ChalkboardSE-Light", size: 20))
                         .fixedSize(horizontal: false, vertical: true)
                         .foregroundColor(MyColors.text)
                         .padding(20)
@@ -49,8 +48,7 @@ struct MainView: View {
                                 .cornerRadius(15)
                                 .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
                             Text("Next Word")
-                                .font(.custom("ChalkboardSE-Light", size: 30))
-                                .minimumScaleFactor(0.5)
+                                .font(.custom("ChalkboardSE-Light", size: 20))
                                 .foregroundColor(MyColors.text)
                         }
                     }

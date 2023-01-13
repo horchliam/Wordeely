@@ -27,6 +27,8 @@
 		7554642B296DFF0B00ECD864 /* MyTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7554642A296DFF0B00ECD864 /* MyTabBarView.swift */; };
 		7554642E296E027900ECD864 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7554642D296E027900ECD864 /* ViewModifiers.swift */; };
 		758980ED2967362C00AB8347 /* CharacterCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758980EC2967362C00AB8347 /* CharacterCollection.swift */; };
+		75DB1BB22971A4AB008AA92B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB1BB12971A4AB008AA92B /* SettingsView.swift */; };
+		75DB1BB42971A4B5008AA92B /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB1BB32971A4B5008AA92B /* StoreView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		7554642A296DFF0B00ECD864 /* MyTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarView.swift; sourceTree = "<group>"; };
 		7554642D296E027900ECD864 /* ViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		758980EC2967362C00AB8347 /* CharacterCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollection.swift; sourceTree = "<group>"; };
+		75DB1BB12971A4AB008AA92B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		75DB1BB32971A4B5008AA92B /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +172,8 @@
 				330D7CB92861534B00E628E1 /* MainView.swift */,
 				334C7004286369A000E5DB8D /* HowToView.swift */,
 				7554642A296DFF0B00ECD864 /* MyTabBarView.swift */,
+				75DB1BB12971A4AB008AA92B /* SettingsView.swift */,
+				75DB1BB32971A4B5008AA92B /* StoreView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -347,7 +353,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75DB1BB22971A4AB008AA92B /* SettingsView.swift in Sources */,
 				758980ED2967362C00AB8347 /* CharacterCollection.swift in Sources */,
+				75DB1BB42971A4B5008AA92B /* StoreView.swift in Sources */,
 				330D7CBA2861534C00E628E1 /* MainView.swift in Sources */,
 				33F8198C2850E2DE00B54AA6 /* GameController.swift in Sources */,
 				75373EAC296619E900B74CB9 /* ColorExtension.swift in Sources */,

@@ -7,26 +7,55 @@
 
 import SwiftUI
 
+enum ExtraButtonTypes: CaseIterable {
+    case Submit
+    case Hint
+}
+
 struct MinimalistKeyboardView: View {
     @EnvironmentObject var game: GameController
     
     var body: some View {
-        ZStack {
-            VStack {
-                ForEach(game.scrambledLetters, id:\.self) { row in
-                    HStack {
-                        ForEach(row, id:\.self) { letter in
-                            Button(action: { game.keyPressed(letter ?? " ")}) {
-                                ZStack {
-                                    Rectangle()
-                                        .modifier(RoundedButton())
-                                    Text(String(letter ?? " "))
-                                        .font(.custom("ChalkboardSE-Light", size: 15))
-                                        .foregroundColor(MyColors.text)
-                                }
-                            }
-                            .buttonStyle(ScaleButtonStyle())
+        VStack {
+            keyboardView
+            HStack {
+                ForEach(game.extraButtons, id:\.self) { button in
+                    switch button {
+                    case .Submit:
+                        ExtraButton(text: "Submit") { [self] in
+                            game.submitPressed()
                         }
+                    case .Hint:
+                        ExtraButton(text: "Hint") {
+                            print("Hint pressed!")
+                        }
+                    case .none:
+                        ExtraButton(text: "", action: {})
+                            .hidden()
+                    }
+                }
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+}
+
+extension MinimalistKeyboardView {
+    var keyboardView: some View {
+        VStack {
+            ForEach(game.scrambledLetters, id:\.self) { row in
+                HStack {
+                    ForEach(row, id:\.self) { letter in
+                        Button(action: { game.keyPressed(letter ?? " ")}) {
+                            ZStack {
+                                Rectangle()
+                                    .modifier(RoundedButton())
+                                Text(String(letter ?? " "))
+                                    .font(.custom("ChalkboardSE-Light", size: 15))
+                                    .foregroundColor(MyColors.text)
+                            }
+                        }
+                        .buttonStyle(ScaleButtonStyle())
                     }
                 }
             }
@@ -36,7 +65,25 @@ struct MinimalistKeyboardView: View {
             RoundedRectangle(cornerRadius: 10)
                 .strokeBorder(MyColors.text ,style: StrokeStyle(lineWidth: 1, dash: [5]))
         )
-        .padding(10)
+        .padding(.horizontal, 10)
+    }
+}
+
+struct ExtraButton: View {
+    var text: String
+    var action: () -> ()
+    
+    var body: some View {
+        Button(action: action) {
+            ZStack {
+                Rectangle()
+                    .modifier(RoundedButton())
+                Text(text)
+                    .font(.custom("ChalkboardSE-Light", size: 15))
+                    .foregroundColor(MyColors.text)
+            }
+        }
+        .buttonStyle(ScaleButtonStyle())
     }
 }
 

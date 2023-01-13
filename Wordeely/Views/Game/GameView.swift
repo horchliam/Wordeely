@@ -16,8 +16,26 @@ struct GameView: View {
             GuessesView().environmentObject(game)
                 .padding(10)
             MinimalistKeyboardView().environmentObject(game)
-                .padding(.bottom, 20)
+            extraButtonsView
+                .padding(.bottom, 10)
         }
+    }
+}
+
+extension GameView {
+    var extraButtonsView: some View {
+        HStack {
+            ExtraButton(text: "Hint", ratio: 3) {
+                print("HI!")
+            }
+            .opacity(game.showHint ? 1 : 0)
+            
+            ExtraButton(text: "Enter", ratio: 3) {
+                game.submitPressed()
+            }
+            .opacity(game.showSubmit ? 1 : 0)
+        }
+        .padding(.horizontal, 20)
     }
 }
 

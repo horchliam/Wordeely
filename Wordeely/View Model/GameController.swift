@@ -61,7 +61,7 @@ class GameController: ObservableObject {
     
     var solution: String = "HAPPY"
     var scrambledLetters: [[Character?]] = [[Character?]]()
-    var difficulty: Difficulty = Difficulty(rawValue: UserDefaults.standard.string(forKey: "Difficulty") ?? "") ?? .Medium
+    var difficulty: Difficulty = Difficulty(rawValue: UserDefaults.standard.string(forKey: "Difficulty") ?? "") ?? .Hard
     var scrambleLength: Int {
         switch difficulty {
         case .Easy:

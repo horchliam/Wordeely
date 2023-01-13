@@ -13,24 +13,6 @@ struct MinimalistKeyboardView: View {
     var body: some View {
         VStack {
             keyboardView
-            HStack {
-                ForEach(0..<6, id:\.self) { index in
-                    switch index {
-                    case 5 where game.showSubmit:
-                        ExtraButton(text: "Enter") {
-                            game.submitPressed()
-                        }
-                    case 4 where game.showHint:
-                        ExtraButton(text: "Hint") {
-                            print("Pressed me!")
-                        }
-                    default:
-                        ExtraButton()
-                            .hidden()
-                    }
-                }
-            }
-            .padding(.horizontal, 20)
         }
     }
 }
@@ -66,13 +48,14 @@ extension MinimalistKeyboardView {
 
 struct ExtraButton: View {
     var text: String = ""
+    var ratio: Int = 1
     var action: () -> () = {}
     
     var body: some View {
         Button(action: action) {
             ZStack {
                 Rectangle()
-                    .modifier(RoundedButton())
+                    .modifier(RoundedButton(ratio: ratio))
                 Text(text)
                     .font(.custom("ChalkboardSE-Light", size: 15))
                     .foregroundColor(MyColors.text)

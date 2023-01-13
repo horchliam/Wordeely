@@ -54,9 +54,13 @@ class GameController: ObservableObject {
     @Published var win: Bool = false
     @Published var score: Int = UserDefaults.standard.integer(forKey: "Score")
     // Dummy place holder value
+    
+    // Bools for extra buttons
+    @Published var showSubmit: Bool = false
+    @Published var showHint: Bool = false
+    
     var solution: String = "HAPPY"
     var scrambledLetters: [[Character?]] = [[Character?]]()
-    @Published var extraButtons: [ExtraButtonTypes?] = Array(repeating: nil, count: 6)
     var difficulty: Difficulty = Difficulty(rawValue: UserDefaults.standard.string(forKey: "Difficulty") ?? "") ?? .Medium
     var scrambleLength: Int {
         switch difficulty {
@@ -108,8 +112,6 @@ class GameController: ObservableObject {
         )
         scores = [(nil, nil)]
         opacity = [1.0]
-        addSubmitButton()
-        addHintButton()
     }
     
     func formatArray(_ input: [Character?]) -> [[Character?]] {
@@ -239,15 +241,15 @@ class GameController: ObservableObject {
         letters[row][col] = nil
     }
     
-    func addSubmitButton() {
-        extraButtons[5] = .Submit
+    func toggleSubmitButton() {
+        showSubmit = !showSubmit
     }
     
     func shouldAutoSubmit() -> Bool {
-        extraButtons[5] != .Submit
+        !showSubmit
     }
     
-    func addHintButton() {
-        extraButtons[4] = .Hint
+    func toggleHintButton() {
+        showHint = !showHint
     }
 }

@@ -49,7 +49,7 @@ struct MainView: View {
                                     .frame(maxWidth: 600, maxHeight: .infinity)
                                     .padding(10)
                             case .Settings:
-                                SettingsView()
+                                SettingsView().environmentObject(game)
                                     .frame(maxWidth: 600, maxHeight: .infinity)
                             case .Store:
                                 StoreView()

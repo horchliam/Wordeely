@@ -8,8 +8,37 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var game: GameController
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Settings")
+                    .foregroundColor(MyColors.text)
+                    .font(.custom("ChalkboardSE-Bold", size: 25))
+                HStack {
+                    Group {
+                        Button(action: { game.toggleHintButton() }) {
+                            Text("Hint Button")
+                        }
+                        Button(action: { game.toggleSubmitButton() }) {
+                            Text("Submit Button")
+                        }
+                    }
+                    .font(.custom("ChalkboardSE-Light", size: 15))
+                    .foregroundColor(MyColors.text)
+                    Spacer()
+                }
+            }
+            .padding(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .strokeBorder(MyColors.text ,style: StrokeStyle(lineWidth: 1, dash: [5]))
+            )
+            .padding(.horizontal, 10)
+            
+            Spacer()
+        }
     }
 }
 

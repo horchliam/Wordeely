@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-enum ExtraButtonTypes: CaseIterable {
-    case Submit
-    case Hint
-}
-
 struct MinimalistKeyboardView: View {
     @EnvironmentObject var game: GameController
     
@@ -19,18 +14,18 @@ struct MinimalistKeyboardView: View {
         VStack {
             keyboardView
             HStack {
-                ForEach(game.extraButtons, id:\.self) { button in
-                    switch button {
-                    case .Submit:
-                        ExtraButton(text: "Submit") { [self] in
+                ForEach(0..<6, id:\.self) { index in
+                    switch index {
+                    case 5 where game.showSubmit:
+                        ExtraButton(text: "Enter") {
                             game.submitPressed()
                         }
-                    case .Hint:
+                    case 4 where game.showHint:
                         ExtraButton(text: "Hint") {
-                            print("Hint pressed!")
+                            print("Pressed me!")
                         }
-                    case .none:
-                        ExtraButton(text: "", action: {})
+                    default:
+                        ExtraButton()
                             .hidden()
                     }
                 }
@@ -70,8 +65,8 @@ extension MinimalistKeyboardView {
 }
 
 struct ExtraButton: View {
-    var text: String
-    var action: () -> ()
+    var text: String = ""
+    var action: () -> () = {}
     
     var body: some View {
         Button(action: action) {

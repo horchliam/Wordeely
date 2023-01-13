@@ -16,6 +16,7 @@ struct GameView: View {
             GuessesView().environmentObject(game)
                 .padding(10)
             MinimalistKeyboardView().environmentObject(game)
+                .padding(.bottom, 20)
         }
     }
 }

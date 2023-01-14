@@ -12,30 +12,48 @@ struct SettingsView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Settings")
-                    .foregroundColor(MyColors.text)
-                    .font(.custom("ChalkboardSE-Bold", size: 25))
-                HStack {
+            HStack {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Settings")
+                        .foregroundColor(MyColors.text)
+                        .font(.custom("ChalkboardSE-Bold", size: 25))
                     Group {
+                        
                         Button(action: { game.toggleHintButton() }) {
-                            Text("Hint Button")
+                            HStack {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .foregroundColor(MyColors.primary)
+                                        .frame(width:30, height:30)
+                                    Text(game.showHint ? "X" : "")
+                                }
+                                Text("Show hint button")
+                            }
                         }
+                        .buttonStyle(ScaleButtonStyle())
                         Button(action: { game.toggleSubmitButton() }) {
-                            Text("Submit Button")
+                            HStack {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .foregroundColor(MyColors.primary)
+                                        .frame(width:30, height:30)
+                                    Text(game.showSubmit ? "X" : "")
+                                }
+                                Text("Show submit button")
+                            }
                         }
+                        .buttonStyle(ScaleButtonStyle())
                     }
                     .font(.custom("ChalkboardSE-Light", size: 15))
                     .foregroundColor(MyColors.text)
-                    Spacer()
                 }
+                Spacer()
             }
             .padding(10)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .strokeBorder(MyColors.text ,style: StrokeStyle(lineWidth: 1, dash: [5]))
             )
-            .padding(.horizontal, 10)
             
             Spacer()
         }

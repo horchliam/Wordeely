@@ -17,25 +17,35 @@ struct GameView: View {
                 .padding(10)
             MinimalistKeyboardView().environmentObject(game)
             extraButtonsView
-                .padding(.bottom, 10)
         }
+        .padding(.bottom, 10)
     }
 }
 
 extension GameView {
     var extraButtonsView: some View {
-        HStack {
-            ExtraButton(text: "Hint", ratio: 3) {
-                print("HI!")
+        Group {
+            if(game.showHint || game.showSubmit) {
+                HStack {
+                    HStack {
+                        ExtraButton(text: "?", ratio: 1) {
+                            game.revealLetter()
+                        }
+                        .opacity(game.showHint ? (game.hintCount == 0 ? 0.5 : 1) : 0)
+                        ExtraButton(ratio: 1)
+                            .hidden()
+                        ExtraButton(ratio: 1)
+                            .hidden()
+                    }
+                    
+                    ExtraButton(text: "->", ratio: 3) {
+                        game.submitPressed()
+                    }
+                    .opacity(game.showSubmit ? 1 : 0)
+                }
+                .padding(.horizontal, 20)
             }
-            .opacity(game.showHint ? 1 : 0)
-            
-            ExtraButton(text: "Enter", ratio: 3) {
-                game.submitPressed()
-            }
-            .opacity(game.showSubmit ? 1 : 0)
         }
-        .padding(.horizontal, 20)
     }
 }
 

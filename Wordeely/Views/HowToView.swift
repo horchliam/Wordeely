@@ -31,7 +31,6 @@ struct HowToView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .strokeBorder(MyColors.text ,style: StrokeStyle(lineWidth: 1, dash: [5]))
             )
-            .padding(.horizontal, 10)
             VStack(alignment: .leading, spacing: 6) {
                 Text("Example")
                     .foregroundColor(MyColors.text)
@@ -57,7 +56,6 @@ struct HowToView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .strokeBorder(MyColors.text ,style: StrokeStyle(lineWidth: 1, dash: [5]))
             )
-            .padding(10)
             // Let the user guess a word and see how the numbers compare to Happy?
             // Push everything up
             Spacer()

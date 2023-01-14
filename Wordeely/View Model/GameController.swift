@@ -58,6 +58,7 @@ class GameController: ObservableObject {
     // Bools for extra buttons
     @Published var showSubmit: Bool = false
     @Published var showHint: Bool = false
+    var hintCount: Int = 2
     
     var solution: String = "HAPPY"
     var scrambledLetters: [[Character?]] = [[Character?]]()
@@ -112,6 +113,7 @@ class GameController: ObservableObject {
         )
         scores = [(nil, nil)]
         opacity = [1.0]
+        hintCount = 2
     }
     
     func formatArray(_ input: [Character?]) -> [[Character?]] {
@@ -251,5 +253,16 @@ class GameController: ObservableObject {
     
     func toggleHintButton() {
         showHint = !showHint
+    }
+    
+    func revealLetter() {
+        guard col < 5 && hintCount > 0 else {
+            return
+        }
+            
+        hintCount -= 1
+        let i = col
+        let letter = solution[solution.index(solution.startIndex, offsetBy: i)]
+        keyPressed(letter)
     }
 }

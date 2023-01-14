@@ -11,7 +11,7 @@ enum ViewType: String, CaseIterable {
     case Main = "Play"
     case HowTo = "HowTo"
     case Settings = "Settings"
-    case Store = "Store"
+//    case Store = "Store"
 }
 
 enum Difficulty: String, CaseIterable{
@@ -51,9 +51,10 @@ struct MainView: View {
                             case .Settings:
                                 SettingsView().environmentObject(game)
                                     .frame(maxWidth: 600, maxHeight: .infinity)
-                            case .Store:
-                                StoreView()
-                                    .frame(maxWidth: 600, maxHeight: .infinity)
+                                    .padding(10)
+//                            case .Store:
+//                                StoreView()
+//                                    .frame(maxWidth: 600, maxHeight: .infinity)
                             }
                             Spacer()
                         }

@@ -78,6 +78,9 @@ extension MainView {
                 Spacer()
                 Button(action: {
                     game.dismissWinView()
+                    if(game.difficulty != .Daily) {
+                        game.newGame()
+                    }
                 }) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 15)
@@ -87,7 +90,7 @@ extension MainView {
                             .foregroundColor(MyColors.primary)
                             .cornerRadius(15)
                             .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
-                        Text("Next Word")
+                        Text(game.difficulty == .Daily ? "Dismiss" : "Next Word")
                             .font(.custom("ChalkboardSE-Light", size: 20))
                             .foregroundColor(MyColors.text)
                     }
@@ -129,6 +132,12 @@ extension MainView {
                                     }
                                     game.showSidebar = false
                                     showSubTabBar = false
+                                    withAnimation(.default) {
+                                        game.headerOpacity = 1.0
+                                    }
+                                    withAnimation(.default.delay(1.0).speed(0.5)) {
+                                        game.headerOpacity = 0.0
+                                    }
                                 }
                             }
                         }

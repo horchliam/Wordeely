@@ -57,11 +57,12 @@ class GameController: ObservableObject {
     // Did ya win?
     @Published var win: Bool = false
     @Published var score: Int = UserDefaults.standard.integer(forKey: "Score")
+    @Published var headerOpacity: Double = 1.0
     // Dummy place holder value
     
     // Bools for extra buttons
-    @Published var showSubmit: Bool = false
-    @Published var showHint: Bool = false
+    @Published var showSubmit: Bool = UserDefaults.standard.bool(forKey: "ShowSubmit")
+    @Published var showHint: Bool = UserDefaults.standard.bool(forKey: "ShowHint")
     var hintCount: Int = 2
     
     var solution: String = "HAPPY"
@@ -101,7 +102,6 @@ class GameController: ObservableObject {
         win = false
         score = score + 100
         UserDefaults.standard.set(score, forKey: "Score")
-        newGame()
     }
     
     // Pick a new random word and reset the guesses
@@ -112,7 +112,6 @@ class GameController: ObservableObject {
             solution = words.randomElement()!.lowercased()
         }
         let temp = scrambleLetters()
-//        scrambledLetters = [Array(temp[0..<scrambleLength/3]), Array(temp[scrambleLength/3..<2*scrambleLength/3]), Array(temp[2*scrambleLength/3..<scrambleLength])]
         scrambledLetters = formatArray(temp)
         print("The word is \(solution)")
         row = 0
@@ -186,6 +185,12 @@ class GameController: ObservableObject {
             return
         }
         
+        if(scores[row].0 == 5) {
+            self.win = true
+            self.editable = true
+            return
+        }
+        
         if(!evaluate()) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
                 self.row = self.row + 1
@@ -255,6 +260,7 @@ class GameController: ObservableObject {
     
     func toggleSubmitButton() {
         showSubmit = !showSubmit
+        UserDefaults.standard.set(showSubmit, forKey: "ShowSubmit")
     }
     
     func shouldAutoSubmit() -> Bool {
@@ -263,6 +269,7 @@ class GameController: ObservableObject {
     
     func toggleHintButton() {
         showHint = !showHint
+        UserDefaults.standard.set(showSubmit, forKey: "ShowSubmit")
     }
     
     func revealLetter() {
@@ -296,7 +303,7 @@ class GameController: ObservableObject {
                     do {
                         let theWord = try JSONDecoder().decode(WordeelyResponse.self, from: data)
                         print("Word from server: " + theWord.word)
-                        self.dailySolution = theWord.word
+                        self.setDailyWord(word: theWord.word)
                     } catch let error {
                         print("Error decoding: ", error)
                     }
@@ -305,5 +312,10 @@ class GameController: ObservableObject {
         }
 
         dataTask.resume()
+    }
+    
+    func setDailyWord(word: String) {
+        self.dailySolution = word
+        newGame()
     }
 }

@@ -17,7 +17,7 @@ import SwiftUI
 @main
 struct WordeelyApp: App {
     @StateObject var game: GameController = GameController()
-
+    
     var body: some Scene {
         // The start of the app
         WindowGroup {

@@ -11,13 +11,13 @@ enum ViewType: String, CaseIterable {
     case Main = "Play"
     case HowTo = "HowTo"
     case Settings = "Settings"
-//    case Store = "Store"
 }
 
 enum Difficulty: String, CaseIterable{
     case Easy = "Easy"
     case Medium = "Medium"
     case Hard = "Hard"
+    case Daily = "Daily"
 }
 
 struct MainView: View {
@@ -49,12 +49,10 @@ struct MainView: View {
                                     .frame(maxWidth: 600, maxHeight: .infinity)
                                     .padding(10)
                             case .Settings:
-                                SettingsView().environmentObject(game)
+                                SettingsView()
+                                    .environmentObject(game)
                                     .frame(maxWidth: 600, maxHeight: .infinity)
                                     .padding(10)
-//                            case .Store:
-//                                StoreView()
-//                                    .frame(maxWidth: 600, maxHeight: .infinity)
                             }
                             Spacer()
                         }
@@ -135,7 +133,7 @@ extension MainView {
                             }
                         }
                         .padding(.horizontal, 20)
-                        .frame(height: 150)
+                        .frame(height: 200)
                     }
                 } else {
                     Button(action: {
@@ -148,7 +146,8 @@ extension MainView {
                                 .aspectRatio(2, contentMode: .fit)
                                 .foregroundColor(MyColors.primary)
                             Text(viewType.rawValue)
-                                .font(.custom("ChalkboardSE-Light", size: 30))
+                                .font(.custom("ChalkboardSE-Light",
+                                              size: 30))
                                 .minimumScaleFactor(0.5)
                                 .foregroundColor(MyColors.text)
                         }

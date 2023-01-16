@@ -285,7 +285,7 @@ class GameController: ObservableObject {
     
     // Daily Game Controller stuff
     func getWord() {
-        guard let url = URL(string: "http://localhost:8000/api/Password12/wordeely") else { fatalError("Missing URL") }
+        guard let url = URL(string: "https://blogdeliam.com/api/Password12/wordeely") else { fatalError("Missing URL") }
         
         let urlRequest = URLRequest(url: url)
         

@@ -22,12 +22,16 @@ import UIKit
     There is nothing here yet, guess is in progress, has not been evaluated
  ]
  */
+struct WordeelyResponse: Decodable {
+    let word: String
+}
+
 class GameController: ObservableObject {
     let width: Int
     var height: Int
     
     @Published var row: Int = 0
-    private var col: Int = 0
+    var col: Int = 0
 
     private var words: [String] {
         if let path = Bundle.main.path(forResource: "Words", ofType: "txt") {
@@ -53,21 +57,23 @@ class GameController: ObservableObject {
     // Did ya win?
     @Published var win: Bool = false
     @Published var score: Int = UserDefaults.standard.integer(forKey: "Score")
+    @Published var headerOpacity: Double = 1.0
     // Dummy place holder value
     
     // Bools for extra buttons
-    @Published var showSubmit: Bool = false
-    @Published var showHint: Bool = false
+    @Published var showSubmit: Bool = UserDefaults.standard.bool(forKey: "ShowSubmit")
+    @Published var showHint: Bool = UserDefaults.standard.bool(forKey: "ShowHint")
     var hintCount: Int = 2
     
     var solution: String = "HAPPY"
-    var scrambledLetters: [[Character?]] = [[Character?]]()
+    var dailySolution: String = "HAPPY"
+    @Published var scrambledLetters: [[Character?]] = [[Character?]]()
     var difficulty: Difficulty = Difficulty(rawValue: UserDefaults.standard.string(forKey: "Difficulty") ?? "") ?? .Hard
     var scrambleLength: Int {
         switch difficulty {
         case .Easy:
             return 12
-        case .Medium:
+        case .Medium, .Daily:
             return 18
         case .Hard:
             return 24
@@ -83,6 +89,7 @@ class GameController: ObservableObject {
         )
         opacity = [0.0]
         scores = [(nil, nil)]
+        getWord()
         newGame()
     }
     
@@ -95,14 +102,16 @@ class GameController: ObservableObject {
         win = false
         score = score + 100
         UserDefaults.standard.set(score, forKey: "Score")
-        newGame()
     }
     
     // Pick a new random word and reset the guesses
     func newGame() {
-        solution = words.randomElement()!.lowercased()
+        if(difficulty == .Daily) {
+            solution = dailySolution
+        } else {
+            solution = words.randomElement()!.lowercased()
+        }
         let temp = scrambleLetters()
-//        scrambledLetters = [Array(temp[0..<scrambleLength/3]), Array(temp[scrambleLength/3..<2*scrambleLength/3]), Array(temp[2*scrambleLength/3..<scrambleLength])]
         scrambledLetters = formatArray(temp)
         print("The word is \(solution)")
         row = 0
@@ -176,6 +185,12 @@ class GameController: ObservableObject {
             return
         }
         
+        if(scores[row].0 == 5) {
+            self.win = true
+            self.editable = true
+            return
+        }
+        
         if(!evaluate()) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
                 self.row = self.row + 1
@@ -245,6 +260,7 @@ class GameController: ObservableObject {
     
     func toggleSubmitButton() {
         showSubmit = !showSubmit
+        UserDefaults.standard.set(showSubmit, forKey: "ShowSubmit")
     }
     
     func shouldAutoSubmit() -> Bool {
@@ -253,6 +269,7 @@ class GameController: ObservableObject {
     
     func toggleHintButton() {
         showHint = !showHint
+        UserDefaults.standard.set(showSubmit, forKey: "ShowSubmit")
     }
     
     func revealLetter() {
@@ -264,5 +281,41 @@ class GameController: ObservableObject {
         let i = col
         let letter = solution[solution.index(solution.startIndex, offsetBy: i)]
         keyPressed(letter)
+    }
+    
+    // Daily Game Controller stuff
+    func getWord() {
+        guard let url = URL(string: "http://localhost:8000/api/Password12/wordeely") else { fatalError("Missing URL") }
+        
+        let urlRequest = URLRequest(url: url)
+        
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            if let error = error {
+                print("Request error: ", error)
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse else { return }
+
+            if response.statusCode == 200 {
+                guard let data = data else { return }
+                DispatchQueue.main.async {
+                    do {
+                        let theWord = try JSONDecoder().decode(WordeelyResponse.self, from: data)
+                        print("Word from server: " + theWord.word)
+                        self.setDailyWord(word: theWord.word)
+                    } catch let error {
+                        print("Error decoding: ", error)
+                    }
+                }
+            }
+        }
+
+        dataTask.resume()
+    }
+    
+    func setDailyWord(word: String) {
+        self.dailySolution = word
+        newGame()
     }
 }

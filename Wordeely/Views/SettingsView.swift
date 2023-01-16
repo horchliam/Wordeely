@@ -19,7 +19,9 @@ struct SettingsView: View {
                         .font(.custom("ChalkboardSE-Bold", size: 25))
                     Group {
                         
-                        Button(action: { game.toggleHintButton() }) {
+                        Button(action: {
+                            game.toggleHintButton()
+                        }) {
                             HStack {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)
@@ -31,7 +33,9 @@ struct SettingsView: View {
                             }
                         }
                         .buttonStyle(ScaleButtonStyle())
-                        Button(action: { game.toggleSubmitButton() }) {
+                        Button(action: {
+                            game.toggleSubmitButton()
+                        }) {
                             HStack {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 10)

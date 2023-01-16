@@ -11,13 +11,13 @@ enum ViewType: String, CaseIterable {
     case Main = "Play"
     case HowTo = "HowTo"
     case Settings = "Settings"
-//    case Store = "Store"
 }
 
 enum Difficulty: String, CaseIterable{
     case Easy = "Easy"
     case Medium = "Medium"
     case Hard = "Hard"
+    case Daily = "Daily"
 }
 
 struct MainView: View {
@@ -49,12 +49,10 @@ struct MainView: View {
                                     .frame(maxWidth: 600, maxHeight: .infinity)
                                     .padding(10)
                             case .Settings:
-                                SettingsView().environmentObject(game)
+                                SettingsView()
+                                    .environmentObject(game)
                                     .frame(maxWidth: 600, maxHeight: .infinity)
                                     .padding(10)
-//                            case .Store:
-//                                StoreView()
-//                                    .frame(maxWidth: 600, maxHeight: .infinity)
                             }
                             Spacer()
                         }
@@ -80,6 +78,9 @@ extension MainView {
                 Spacer()
                 Button(action: {
                     game.dismissWinView()
+                    if(game.difficulty != .Daily) {
+                        game.newGame()
+                    }
                 }) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 15)
@@ -89,7 +90,7 @@ extension MainView {
                             .foregroundColor(MyColors.primary)
                             .cornerRadius(15)
                             .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
-                        Text("Next Word")
+                        Text(game.difficulty == .Daily ? "Dismiss" : "Next Word")
                             .font(.custom("ChalkboardSE-Light", size: 20))
                             .foregroundColor(MyColors.text)
                     }
@@ -131,11 +132,17 @@ extension MainView {
                                     }
                                     game.showSidebar = false
                                     showSubTabBar = false
+                                    withAnimation(.default) {
+                                        game.headerOpacity = 1.0
+                                    }
+                                    withAnimation(.default.delay(1.0).speed(0.5)) {
+                                        game.headerOpacity = 0.0
+                                    }
                                 }
                             }
                         }
                         .padding(.horizontal, 20)
-                        .frame(height: 150)
+                        .frame(height: 200)
                     }
                 } else {
                     Button(action: {
@@ -148,7 +155,8 @@ extension MainView {
                                 .aspectRatio(2, contentMode: .fit)
                                 .foregroundColor(MyColors.primary)
                             Text(viewType.rawValue)
-                                .font(.custom("ChalkboardSE-Light", size: 30))
+                                .font(.custom("ChalkboardSE-Light",
+                                              size: 30))
                                 .minimumScaleFactor(0.5)
                                 .foregroundColor(MyColors.text)
                         }

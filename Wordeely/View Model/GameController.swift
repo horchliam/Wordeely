@@ -46,7 +46,7 @@ class GameController: ObservableObject {
         return ["HAPPY"]
     }
     
-    private var editable: Bool = true
+    var editable: Bool = true
     
     @Published var showSidebar: Bool = false
     // Array of tuples representing how correct each guess was
@@ -67,7 +67,7 @@ class GameController: ObservableObject {
     
     var solution: String = "HAPPY"
     var dailySolution: String = "HAPPY"
-    @Published var scrambledLetters: [[Character?]] = [[Character?]]()
+    @Published var scrambledLetters: [[Character]] = [[Character]]()
     var difficulty: Difficulty = Difficulty(rawValue: UserDefaults.standard.string(forKey: "Difficulty") ?? "") ?? .Hard
     var scrambleLength: Int {
         switch difficulty {
@@ -80,7 +80,11 @@ class GameController: ObservableObject {
         }
     }
     
+    
     init(width: Int = 5, height: Int = 1) {
+//        let domain = Bundle.main.bundleIdentifier!
+//        UserDefaults.standard.removePersistentDomain(forName: domain)
+//        UserDefaults.standard.synchronize()
         self.width = width
         self.height = height
         letters = Array(
@@ -107,6 +111,12 @@ class GameController: ObservableObject {
     // Pick a new random word and reset the guesses
     func newGame() {
         if(difficulty == .Daily) {
+            if let session = getDailySession() {
+                if session.solution == dailySolution {
+                    loadDailySession(session)
+                    return
+                }
+            }
             solution = dailySolution
         } else {
             solution = words.randomElement()!.lowercased()
@@ -126,12 +136,12 @@ class GameController: ObservableObject {
         editable = true
     }
     
-    func formatArray(_ input: [Character?]) -> [[Character?]] {
-        var res = [[Character?]]()
-        var temp = [Character?]()
+    func formatArray(_ input: [Character]) -> [[Character]] {
+        var res = [[Character]]()
+        var temp = [Character]()
         
         for i in 0..<input.count/6 {
-            temp = [Character?]()
+            temp = [Character]()
             for j in 0..<6 {
                 temp.append(input[i*6 + j])
             }
@@ -142,7 +152,7 @@ class GameController: ObservableObject {
     }
     
     // Scramble the possible letters to use
-    func scrambleLetters() -> [Character?] {
+    func scrambleLetters() -> [Character] {
         var result: [Character?] = Array(
             repeating: nil,
             count: scrambleLength
@@ -163,12 +173,12 @@ class GameController: ObservableObject {
             }
         }
         
-        return result
+        return result.compactMap{ $0 }
     }
     
     // Add the pressed letter to the current guess
     func keyPressed(_ letter: Character) {
-        guard col < 5 else {
+        guard col < 5 && editable else {
             return
         }
         
@@ -184,6 +194,7 @@ class GameController: ObservableObject {
             // Prompt user to put in 5 characters maybe
             return
         }
+        
         editable = false
         
         if(scores[row].0 == 5) {
@@ -199,10 +210,16 @@ class GameController: ObservableObject {
                 self.letters.append(rowToAdd)
                 self.scores.append((nil, nil))
                 self.col = 0
+                if(self.difficulty == .Daily) {
+                    self.saveDailySession()
+                }
                 self.editable = true
             }
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
+                if(self.difficulty == .Daily) {
+                    self.saveDailySession()
+                }
                 self.vibrate(type: .success)
                 self.win = true
                 self.editable = (self.difficulty != .Daily)
@@ -269,11 +286,11 @@ class GameController: ObservableObject {
     
     func toggleHintButton() {
         showHint = !showHint
-        UserDefaults.standard.set(showSubmit, forKey: "ShowSubmit")
+        UserDefaults.standard.set(showHint, forKey: "ShowHint")
     }
     
     func revealLetter() {
-        guard col < 5 && hintCount > 0 else {
+        guard col < 5 && hintCount > 0 && editable else {
             return
         }
             

@@ -29,6 +29,7 @@
 		758980ED2967362C00AB8347 /* CharacterCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758980EC2967362C00AB8347 /* CharacterCollection.swift */; };
 		75DB1BB22971A4AB008AA92B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB1BB12971A4AB008AA92B /* SettingsView.swift */; };
 		75DB1BB42971A4B5008AA92B /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB1BB32971A4B5008AA92B /* StoreView.swift */; };
+		75DB1BBA2975FD00008AA92B /* GameController+DailyPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DB1BB92975FD00008AA92B /* GameController+DailyPersistence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		758980EC2967362C00AB8347 /* CharacterCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCollection.swift; sourceTree = "<group>"; };
 		75DB1BB12971A4AB008AA92B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		75DB1BB32971A4B5008AA92B /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
+		75DB1BB92975FD00008AA92B /* GameController+DailyPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameController+DailyPersistence.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 			children = (
 				33F8198B2850E2DE00B54AA6 /* GameController.swift */,
 				758980EC2967362C00AB8347 /* CharacterCollection.swift */,
+				75DB1BB92975FD00008AA92B /* GameController+DailyPersistence.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				75373EAC296619E900B74CB9 /* ColorExtension.swift in Sources */,
 				334C7005286369A100E5DB8D /* HowToView.swift in Sources */,
 				75373EAF2966207F00B74CB9 /* MyColors.swift in Sources */,
+				75DB1BBA2975FD00008AA92B /* GameController+DailyPersistence.swift in Sources */,
 				333ED3D9283FDBB50004B327 /* WordeelyApp.swift in Sources */,
 				7554642B296DFF0B00ECD864 /* MyTabBarView.swift in Sources */,
 				3379314E2864BD1E00482049 /* PopUpView.swift in Sources */,

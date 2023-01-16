@@ -19,16 +19,16 @@ struct MinimalistKeyboardView: View {
 
 extension MinimalistKeyboardView {
     var keyboardView: some View {
-        VStack {
+        VStack(spacing: 15) {
             ForEach(game.scrambledLetters, id:\.self) { row in
                 HStack {
                     ForEach(row, id:\.self) { letter in
-                        Button(action: { game.keyPressed(letter ?? " ")}) {
+                        Button(action: { game.keyPressed(letter)}) {
                             ZStack {
                                 Rectangle()
                                     .modifier(RoundedButton())
-                                Text(String(letter ?? " "))
-                                    .font(.custom("ChalkboardSE-Light", size: 15))
+                                Text(String(letter))
+                                    .font(.custom("ChalkboardSE-Light", size: 18))
                                     .foregroundColor(MyColors.text)
                             }
                         }
@@ -57,7 +57,7 @@ struct ExtraButton: View {
                 Rectangle()
                     .modifier(RoundedButton(ratio: ratio))
                 Text(text)
-                    .font(.custom("ChalkboardSE-Light", size: 15))
+                    .font(.custom("ChalkboardSE-Light", size: 18))
                     .foregroundColor(MyColors.text)
             }
         }

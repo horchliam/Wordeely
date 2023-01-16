@@ -57,7 +57,7 @@ extension GuessLetterCell {
             Rectangle()
                 .modifier(RoundedButton())
             Text(String(letter ?? " "))
-                .font(.custom("ChalkboardSE-Light", size: 15))
+                .font(.custom("ChalkboardSE-Light", size: 18))
                 .foregroundColor(MyColors.text)
         }
     }
@@ -95,7 +95,7 @@ struct GuessAnswerCellNumber: View {
             Rectangle()
                 .modifier(RoundedButton())
             Text(score != nil ? "\(score!)" : "")
-                .font(.custom("ChalkboardSE-Light", size: 15))
+                .font(.custom("ChalkboardSE-Light", size: 16))
                 .foregroundColor(MyColors.text)
         }
         .scaleEffect((score == nil) ? 0 : 1)

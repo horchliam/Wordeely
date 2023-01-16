@@ -123,6 +123,7 @@ class GameController: ObservableObject {
         scores = [(nil, nil)]
         opacity = [1.0]
         hintCount = 2
+        editable = true
     }
     
     func formatArray(_ input: [Character?]) -> [[Character?]] {
@@ -174,7 +175,6 @@ class GameController: ObservableObject {
         letters[row][col] = letter
         col = col + 1
         if shouldAutoSubmit() && col == 5 {
-            editable = false
             submitPressed()
         }
     }
@@ -184,10 +184,10 @@ class GameController: ObservableObject {
             // Prompt user to put in 5 characters maybe
             return
         }
+        editable = false
         
         if(scores[row].0 == 5) {
             self.win = true
-            self.editable = true
             return
         }
         
@@ -205,7 +205,7 @@ class GameController: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
                 self.vibrate(type: .success)
                 self.win = true
-                self.editable = true
+                self.editable = (self.difficulty != .Daily)
             }
         }
     }

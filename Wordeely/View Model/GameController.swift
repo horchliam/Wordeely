@@ -157,6 +157,7 @@ class GameController: ObservableObject {
                 solution = dailySolution
                 let temp = scrambleLetters()
                 scrambledLetters = formatArray(temp)
+                saveDailySession()
             }
         } else {
             solution = words.randomElement()!.lowercased()
@@ -374,7 +375,9 @@ class GameController: ObservableObject {
     
     func setDailyWord(word: String) {
         self.dailySolution = word
-        newGame()
-        saveDailySession()
+        if(difficulty == .Daily) {
+            newGame()
+            saveDailySession()
+        }
     }
 }

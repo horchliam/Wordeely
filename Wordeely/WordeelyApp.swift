@@ -27,6 +27,7 @@ struct WordeelyApp: App {
                 
                 MainView()
                     .environmentObject(game)
+                    .statusBarHidden(true)
             }
         }
     }

@@ -59,7 +59,8 @@ struct MainView: View {
                     }
                 })
             }
-        }.environmentObject(game)
+        }
+        .environmentObject(game)
     }
 }
 
@@ -77,10 +78,12 @@ extension MainView {
                     .padding(20)
                 Spacer()
                 Button(action: {
-                    game.dismissWinView()
                     if(game.difficulty != .Daily) {
                         game.newGame()
+                    } else {
+                        shareButton()
                     }
+                    game.dismissWinView()
                 }) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 15)
@@ -90,13 +93,20 @@ extension MainView {
                             .foregroundColor(MyColors.primary)
                             .cornerRadius(15)
                             .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)
-                        Text(game.difficulty == .Daily ? "Dismiss" : "Next Word")
+                        Text(game.difficulty == .Daily ? "Share" : "Next Word")
                             .font(.custom("ChalkboardSE-Light", size: 20))
                             .foregroundColor(MyColors.text)
                     }
                 }
             }
         }
+    }
+    
+    func shareButton() {
+        let text = game.shareResultText ?? ""
+        let activityController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+        
+        UIApplication.shared.windows.first?.rootViewController!.present(activityController, animated: true, completion: nil)
     }
 }
 

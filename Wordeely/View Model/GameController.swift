@@ -80,6 +80,32 @@ class GameController: ObservableObject {
         }
     }
     
+    var shareResultText: String? {
+        guard scores[row].0 == 5 && difficulty == .Daily else { return nil }
+        
+        let hintsUsed = (hintCount - 2) * -1
+        
+        var text = "⚪️\t\tWordeely\n\n"
+        for _ in 0..<letters.count {
+            text = text + "\t⬜️⬜️⬜️⬜️⬜️\n"
+        }
+
+        text = text + "Hints used: " + String(hintsUsed) + " "
+        switch hintsUsed {
+        case 0:
+            text = text + "💪😎🧐"
+        case 1:
+            text = text + "🧌🧌"
+        case 2:
+            text = text + "🍼👶"
+        default:
+            text = text + "🧌"
+        }
+        
+        text = text + "\n\nENTER LINK HERE"
+        
+        return text
+    }
     
     init(width: Int = 5, height: Int = 1) {
 //        let domain = Bundle.main.bundleIdentifier!

@@ -140,6 +140,9 @@ extension MainView {
                                         UserDefaults.standard.set(value.rawValue, forKey: "Difficulty")
                                         game.newGame()
                                     }
+                                    if(game.difficulty == .Daily) {
+                                        game.getWord()
+                                    }
                                     game.showSidebar = false
                                     showSubTabBar = false
                                     withAnimation(.default) {

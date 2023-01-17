@@ -113,9 +113,9 @@ class GameController: ObservableObject {
     }
     
     init(width: Int = 5, height: Int = 1) {
-        let domain = Bundle.main.bundleIdentifier!
-        UserDefaults.standard.removePersistentDomain(forName: domain)
-        UserDefaults.standard.synchronize()
+//        let domain = Bundle.main.bundleIdentifier!
+//        UserDefaults.standard.removePersistentDomain(forName: domain)
+//        UserDefaults.standard.synchronize()
         self.width = width
         self.height = height
         letters = Array(

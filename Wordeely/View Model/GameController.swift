@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 /* Game Structure Visualization...
  
@@ -84,33 +85,37 @@ class GameController: ObservableObject {
         guard scores[row].0 == 5 && difficulty == .Daily else { return nil }
         
         let hintsUsed = (hintCount - 2) * -1
+        let date = Date()
+        let df = DateFormatter()
+        df.dateFormat = "MM/dd"
+        let dateString = df.string(from: date)
         
-        var text = "⚪️\t\tWordeely\n\n"
+        var text = "Wordeely " + dateString + "\n\n"
         for _ in 0..<letters.count {
-            text = text + "\t⬜️⬜️⬜️⬜️⬜️\n"
+            text = text + "◽️◽️◽️◽️◽️\n"
         }
 
-        text = text + "Hints used: " + String(hintsUsed) + " "
+        text = text + "\nHints used: " + String(hintsUsed) + "\n"
         switch hintsUsed {
         case 0:
             text = text + "💪😎🧐"
         case 1:
-            text = text + "🧌🧌"
+            text = text + "🧌🧌🧌"
         case 2:
-            text = text + "🍼👶"
+            text = text + "🍼👶👶"
         default:
-            text = text + "🧌"
+            text = text + "🧌🧌🧌"
         }
         
-        text = text + "\n\nENTER LINK HERE"
+        text = text + "\nhttps://apps.apple.com/us/app/wordeely/id1664644818"
         
         return text
     }
     
     init(width: Int = 5, height: Int = 1) {
-//        let domain = Bundle.main.bundleIdentifier!
-//        UserDefaults.standard.removePersistentDomain(forName: domain)
-//        UserDefaults.standard.synchronize()
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
         self.width = width
         self.height = height
         letters = Array(
@@ -143,12 +148,23 @@ class GameController: ObservableObject {
                     return
                 }
             }
-            solution = dailySolution
+            if(dailySolution == "HAPPY") {
+                scrambledLetters = Array(
+                    repeating: .init(repeating: " ", count: 6),
+                    count: 3
+                )
+            } else {
+                solution = dailySolution
+                let temp = scrambleLetters()
+                scrambledLetters = formatArray(temp)
+                saveDailySession()
+            }
         } else {
             solution = words.randomElement()!.lowercased()
+            let temp = scrambleLetters()
+            scrambledLetters = formatArray(temp)
         }
-        let temp = scrambleLetters()
-        scrambledLetters = formatArray(temp)
+        
         print("The word is \(solution)")
         row = 0
         col = 0
@@ -204,7 +220,7 @@ class GameController: ObservableObject {
     
     // Add the pressed letter to the current guess
     func keyPressed(_ letter: Character) {
-        guard col < 5 && editable else {
+        guard col < 5 && editable && letter != " " else {
             return
         }
         
@@ -359,6 +375,9 @@ class GameController: ObservableObject {
     
     func setDailyWord(word: String) {
         self.dailySolution = word
-        newGame()
+        if(difficulty == .Daily) {
+            newGame()
+            saveDailySession()
+        }
     }
 }

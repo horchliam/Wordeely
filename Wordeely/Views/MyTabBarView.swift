@@ -29,7 +29,7 @@ struct MyTabBarView: View {
             HStack {
                 Spacer()
                 Text(game.difficulty.rawValue)
-                    .font(.custom("ChalkboardSE-Light", size: 15))
+                    .font(.custom("ChalkboardSE-Light", size: 20))
                     .foregroundColor(MyColors.text)
                     .opacity(game.headerOpacity)
                 Spacer()

@@ -64,12 +64,15 @@ class GameController: ObservableObject {
     // Bools for extra buttons
     @Published var showSubmit: Bool = UserDefaults.standard.bool(forKey: "ShowSubmit")
     @Published var showHint: Bool = UserDefaults.standard.bool(forKey: "ShowHint")
+    @Published var sortLetters: Bool = UserDefaults.standard.bool(forKey: "SortLetters")
     var hintCount: Int = 2
     
     var solution: String = "HAPPY"
     var dailySolution: String = "HAPPY"
     @Published var scrambledLetters: [[Character]] = [[Character]]()
-    var difficulty: Difficulty = Difficulty(rawValue: UserDefaults.standard.string(forKey: "Difficulty") ?? "") ?? .Hard
+    
+    // Potential fix to Mom's "Hard Daily"
+    var difficulty: Difficulty = Difficulty(rawValue: UserDefaults.standard.string(forKey: "Difficulty") ?? "") ?? .Daily
     var scrambleLength: Int {
         switch difficulty {
         case .Easy:
@@ -155,13 +158,19 @@ class GameController: ObservableObject {
                 )
             } else {
                 solution = dailySolution
-                let temp = scrambleLetters()
+                var temp = scrambleLetters()
+                if(sortLetters) {
+                    temp.sort()
+                }
                 scrambledLetters = formatArray(temp)
                 saveDailySession()
             }
         } else {
             solution = words.randomElement()!.lowercased()
-            let temp = scrambleLetters()
+            var temp = scrambleLetters()
+            if(sortLetters) {
+                temp.sort()
+            }
             scrambledLetters = formatArray(temp)
         }
         
@@ -329,6 +338,11 @@ class GameController: ObservableObject {
     func toggleHintButton() {
         showHint = !showHint
         UserDefaults.standard.set(showHint, forKey: "ShowHint")
+    }
+    
+    func toggleOrderKeyboard() {
+        sortLetters = !sortLetters
+        UserDefaults.standard.set(sortLetters, forKey: "SortLetters")
     }
     
     func revealLetter() {

@@ -75,8 +75,12 @@ extension MainView {
                     .font(.custom("ChalkboardSE-Light", size: 20))
                     .fixedSize(horizontal: false, vertical: true)
                     .foregroundColor(MyColors.text)
-                    .padding(20)
-                Spacer()
+                    .padding(10)
+                Text("It took you \(game.scores.count) guesses")
+                    .font(.custom("ChalkboardSE-Light", size: 15))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .foregroundColor(MyColors.text)
+                    .padding(.horizontal, 10)
                 Button(action: {
                     if(game.difficulty != .Daily) {
                         game.newGame()
@@ -89,7 +93,7 @@ extension MainView {
                         RoundedRectangle(cornerRadius: 15)
                             .frame(height: 55)
                             .frame(maxWidth: .infinity)
-                            .padding(20)
+                            .padding(10)
                             .foregroundColor(MyColors.primary)
                             .cornerRadius(15)
                             .shadow(color: MyColors.shadow, radius: 0, x: 2, y: 2)

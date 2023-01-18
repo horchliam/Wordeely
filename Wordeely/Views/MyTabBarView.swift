@@ -16,6 +16,7 @@ struct MyTabBarView: View {
         HStack(spacing: 0) {
             HStack {
                 Button(action: {
+                    guard game.canSelectMenu() else { return }
                     game.showSidebar = true
                 }) {
                     Circle()

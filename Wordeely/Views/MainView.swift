@@ -138,7 +138,9 @@ extension MainView {
                                     if(game.difficulty != value) {
                                         game.difficulty = value
                                         UserDefaults.standard.set(value.rawValue, forKey: "Difficulty")
-                                        game.newGame()
+                                        if(value != .Daily) {
+                                            game.newGame()
+                                        }
                                     }
                                     if(game.difficulty == .Daily) {
                                         game.getWord()

@@ -85,7 +85,7 @@ class GameController: ObservableObject {
     }
     
     var shareResultText: String? {
-        guard scores[row].0 == 5 && difficulty == .Daily else { return nil }
+        guard gameWasWon() && difficulty == .Daily else { return nil }
         
         let hintsUsed = (hintCount - 2) * -1
         let date = Date()
@@ -94,8 +94,10 @@ class GameController: ObservableObject {
         let dateString = df.string(from: date)
         
         var text = "Wordeely " + dateString + "\n\n"
-        for _ in 0..<letters.count {
-            text = text + "◽️◽️◽️◽️◽️\n"
+        for i in 0..<scores.count {
+            let x = scores[i].0!
+            let y = scores[i].1!
+            text = text + "◽️◽️◽️◽️◽️ \(x)/\(y)\n"
         }
 
         text = text + "\nHints used: " + String(hintsUsed) + "\n"
@@ -110,15 +112,17 @@ class GameController: ObservableObject {
             text = text + "🧌🧌🧌"
         }
         
-        text = text + "\nhttps://apps.apple.com/us/app/wordeely/id1664644818"
+        text = text + "https://testflight.apple.com/join/R9SVodKS"
+        // Link for actual app store page
+//        text = text + "\nhttps://apps.apple.com/us/app/wordeely/id1664644818"
         
         return text
     }
     
     init(width: Int = 5, height: Int = 1) {
-//        let domain = Bundle.main.bundleIdentifier!
-//        UserDefaults.standard.removePersistentDomain(forName: domain)
-//        UserDefaults.standard.synchronize()
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
         self.width = width
         self.height = height
         letters = Array(
@@ -128,7 +132,11 @@ class GameController: ObservableObject {
         opacity = [0.0]
         scores = [(nil, nil)]
         getWord()
-        newGame()
+        if(difficulty == .Daily) {
+            newDailyGame()
+        } else {
+            newGame()
+        }
     }
     
     private func vibrate(type: UINotificationFeedbackGenerator.FeedbackType) {
@@ -144,36 +152,48 @@ class GameController: ObservableObject {
     
     // Pick a new random word and reset the guesses
     func newGame() {
-        if(difficulty == .Daily) {
-            if let session = getDailySession() {
-                if session.solution == dailySolution {
-                    loadDailySession(session)
+        solution = words.randomElement()!.lowercased()
+        var temp = scrambleLetters()
+        if(sortLetters) {
+            temp.sort()
+        }
+        scrambledLetters = formatArray(temp)
+        clearAll()
+    }
+    
+    func newDailyGame() {
+        editable = false
+        if let session = getDailySession() {
+            if session.solution == dailySolution {
+                if session.letters.count == letters.count && letters[letters.count - 1][0] != nil && !gameWasWon() {
+                    editable = true
                     return
                 }
+                loadDailySession(session)
+                editable = true
+                return
             }
-            if(dailySolution == "HAPPY") {
-                scrambledLetters = Array(
-                    repeating: .init(repeating: " ", count: 6),
-                    count: 3
-                )
-            } else {
-                solution = dailySolution
-                var temp = scrambleLetters()
-                if(sortLetters) {
-                    temp.sort()
-                }
-                scrambledLetters = formatArray(temp)
-                saveDailySession()
-            }
+        }
+        
+        if(dailySolution == "HAPPY") {
+            scrambledLetters = Array(
+                repeating: .init(repeating: " ", count: 6),
+                count: 3
+            )
+            editable = true
         } else {
-            solution = words.randomElement()!.lowercased()
+            solution = dailySolution
             var temp = scrambleLetters()
             if(sortLetters) {
                 temp.sort()
             }
             scrambledLetters = formatArray(temp)
+            clearAll()
+            saveDailySession()
         }
-        
+    }
+    
+    func clearAll() {
         print("The word is \(solution)")
         row = 0
         col = 0
@@ -185,46 +205,6 @@ class GameController: ObservableObject {
         opacity = [1.0]
         hintCount = 2
         editable = true
-    }
-    
-    func formatArray(_ input: [Character]) -> [[Character]] {
-        var res = [[Character]]()
-        var temp = [Character]()
-        
-        for i in 0..<input.count/6 {
-            temp = [Character]()
-            for j in 0..<6 {
-                temp.append(input[i*6 + j])
-            }
-            res.append(temp)
-        }
-        
-        return res
-    }
-    
-    // Scramble the possible letters to use
-    func scrambleLetters() -> [Character] {
-        var result: [Character?] = Array(
-            repeating: nil,
-            count: scrambleLength
-        )
-        let cc: CharacterCollection = CharacterCollection()
-        var index = Int.random(in: 0..<scrambleLength)
-        for c in solution {
-            if(cc.letters.contains(c)) {
-                while(result[index] != nil) {
-                    index = Int.random(in: 0..<scrambleLength)
-                }
-                result[index] = cc.pop(c: c)
-            }
-        }
-        for i in 0..<result.count {
-            if(result[i] == nil) {
-                result[i] = cc.getRandom()
-            }
-        }
-        
-        return result.compactMap{ $0 }
     }
     
     // Add the pressed letter to the current guess
@@ -318,12 +298,16 @@ class GameController: ObservableObject {
     
     // Delete the most recent letter from the current guess
     func backPressed() {
-        guard col > 0  && editable else {
+        guard col > 0  && editable && !gameWasWon() else {
             return
         }
         
         col = col - 1
         letters[row][col] = nil
+    }
+    
+    func gameWasWon() -> Bool {
+        return scores[row].0 == 5
     }
     
     func toggleSubmitButton() {
@@ -390,8 +374,54 @@ class GameController: ObservableObject {
     func setDailyWord(word: String) {
         self.dailySolution = word
         if(difficulty == .Daily) {
-            newGame()
-            saveDailySession()
+            newDailyGame()
         }
+    }
+    
+    func canSelectMenu() -> Bool {
+        return gameWasWon() || editable
+    }
+}
+
+// Utility methods
+extension GameController {
+    func formatArray(_ input: [Character]) -> [[Character]] {
+        var res = [[Character]]()
+        var temp = [Character]()
+        
+        for i in 0..<input.count/6 {
+            temp = [Character]()
+            for j in 0..<6 {
+                temp.append(input[i*6 + j])
+            }
+            res.append(temp)
+        }
+        
+        return res
+    }
+    
+    // Scramble the possible letters to use
+    func scrambleLetters() -> [Character] {
+        var result: [Character?] = Array(
+            repeating: nil,
+            count: scrambleLength
+        )
+        let cc: CharacterCollection = CharacterCollection()
+        var index = Int.random(in: 0..<scrambleLength)
+        for c in solution {
+            if(cc.letters.contains(c)) {
+                while(result[index] != nil) {
+                    index = Int.random(in: 0..<scrambleLength)
+                }
+                result[index] = cc.pop(c: c)
+            }
+        }
+        for i in 0..<result.count {
+            if(result[i] == nil) {
+                result[i] = cc.getRandom()
+            }
+        }
+        
+        return result.compactMap{ $0 }
     }
 }

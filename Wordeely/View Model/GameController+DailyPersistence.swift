@@ -15,6 +15,8 @@ struct DailyGameSession: Codable {
     let scores: [DailyGameScoreRow]
     let letters: [String]
     let keyboard: [String]
+    
+    let sort: Bool
 }
 
 struct DailyGameScoreRow: Codable {
@@ -29,7 +31,7 @@ extension GameController {
         let newKeyboard = self.scrambledLetters.map{ String($0) }
         let newScores = self.scores.map{ DailyGameScoreRow(x: $0.0, y: $0.1) }
         let toSave = DailyGameSession(solution: self.dailySolution, hintCount: self.hintCount,
-                                      scores: newScores, letters: newLetters, keyboard: newKeyboard)
+                                      scores: newScores, letters: newLetters, keyboard: newKeyboard, sort: self.sortLetters)
         
         do {
             let encoder = JSONEncoder()
@@ -55,7 +57,20 @@ extension GameController {
     
     func loadDailySession(_ toLoad: DailyGameSession) {
         solution = toLoad.solution
-        scrambledLetters = toLoad.keyboard.map{ Array($0) }
+        if(sortLetters) {
+            let temp = toLoad.keyboard.compactMap{ Array($0) }.joined()
+            let other = temp.sorted()
+            scrambledLetters = formatArray(other)
+        } else {
+            if(toLoad.sort) {
+                let temp = toLoad.keyboard.compactMap{ Array($0) }.joined()
+                let other = temp.shuffled()
+                scrambledLetters = formatArray(other)
+                saveDailySession()
+            } else {
+                scrambledLetters = toLoad.keyboard.map{ Array($0) }
+            }
+        }
         print("The word is \(solution)")
         editable = (toLoad.letters.last ?? "") != toLoad.solution
         row = toLoad.letters.count - 1

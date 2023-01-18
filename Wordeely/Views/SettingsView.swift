@@ -33,6 +33,7 @@ struct SettingsView: View {
                             }
                         }
                         .buttonStyle(ScaleButtonStyle())
+                        
                         Button(action: {
                             game.toggleSubmitButton()
                         }) {
@@ -44,6 +45,21 @@ struct SettingsView: View {
                                     Text(game.showSubmit ? "X" : "")
                                 }
                                 Text("Show submit button")
+                            }
+                        }
+                        .buttonStyle(ScaleButtonStyle())
+                        
+                        Button(action: {
+                            game.toggleOrderKeyboard()
+                        }) {
+                            HStack {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .foregroundColor(MyColors.primary)
+                                        .frame(width:30, height:30)
+                                    Text(game.sortLetters ? "X" : "")
+                                }
+                                Text("Alphabetically order keyboard")
                             }
                         }
                         .buttonStyle(ScaleButtonStyle())

@@ -113,9 +113,7 @@ extension MainView {
         UIApplication.shared.windows.first?.rootViewController!.present(activityController, animated: true, completion: nil)
     }
     
-    func transitionDifficulty(_ diff: Difficulty) {
-        game.difficulty = diff
-        UserDefaults.standard.set(diff.rawValue, forKey: "Difficulty")
+    func dismissTabBar() {
         game.showSidebar = false
         showSubTabBar = false
         withAnimation(.default) {
@@ -152,16 +150,19 @@ extension MainView {
                             ForEach(Difficulty.allCases, id:\.self) { value in
                                 SubTabBarTab(diff: value) { [self] in
                                     curView = .Main
-                                    if(game.difficulty != value) {
-                                        if(value == .Daily) {
-                                            game.difficulty = value
-                                            game.getWord() {
-                                                transitionDifficulty(value)
-                                            }
-                                        } else {
-                                            transitionDifficulty(value)
-                                            game.newGame()
+                                    if(value == .Daily) {
+                                        game.difficulty = value
+                                        UserDefaults.standard.set(value.rawValue, forKey: "Difficulty")
+                                        game.getWord() {
+                                            dismissTabBar()
                                         }
+                                    } else {
+                                        if(game.difficulty != value) {
+                                            game.difficulty = value
+                                            game.newGame()
+                                            UserDefaults.standard.set(value.rawValue, forKey: "Difficulty")
+                                        }
+                                        dismissTabBar()
                                     }
                                 }
                             }

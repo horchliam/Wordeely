@@ -163,25 +163,31 @@ class GameController: ObservableObject {
     
     func newDailyGame() {
         editable = false
+        // Existing session
         if let session = getDailySession() {
+            // Session from same day
             if session.solution == dailySolution {
+                // Currently editing do not overwrite
                 if session.letters.count == letters.count && letters[letters.count - 1][0] != nil && !gameWasWon() {
                     editable = true
                     return
                 }
+                // Else load session
                 loadDailySession(session)
                 editable = true
                 return
             }
         }
-        
+        // Call from init
         if(dailySolution == "HAPPY") {
             scrambledLetters = Array(
                 repeating: .init(repeating: " ", count: 6),
                 count: 3
             )
             editable = true
-        } else {
+        }
+        // A new word
+        else {
             solution = dailySolution
             var temp = scrambleLetters()
             if(sortLetters) {

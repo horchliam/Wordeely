@@ -112,6 +112,19 @@ extension MainView {
         
         UIApplication.shared.windows.first?.rootViewController!.present(activityController, animated: true, completion: nil)
     }
+    
+    func transitionDifficulty(_ diff: Difficulty) {
+        game.difficulty = diff
+        UserDefaults.standard.set(diff.rawValue, forKey: "Difficulty")
+        game.showSidebar = false
+        showSubTabBar = false
+        withAnimation(.default) {
+            game.headerOpacity = 1.0
+        }
+        withAnimation(.default.delay(1.0).speed(0.5)) {
+            game.headerOpacity = 0.0
+        }
+    }
 }
 
 extension MainView {
@@ -140,22 +153,15 @@ extension MainView {
                                 SubTabBarTab(diff: value) { [self] in
                                     curView = .Main
                                     if(game.difficulty != value) {
-                                        game.difficulty = value
-                                        UserDefaults.standard.set(value.rawValue, forKey: "Difficulty")
-                                        if(value != .Daily) {
+                                        if(value == .Daily) {
+                                            game.difficulty = value
+                                            game.getWord() {
+                                                transitionDifficulty(value)
+                                            }
+                                        } else {
+                                            transitionDifficulty(value)
                                             game.newGame()
                                         }
-                                    }
-                                    if(game.difficulty == .Daily) {
-                                        game.getWord()
-                                    }
-                                    game.showSidebar = false
-                                    showSubTabBar = false
-                                    withAnimation(.default) {
-                                        game.headerOpacity = 1.0
-                                    }
-                                    withAnimation(.default.delay(1.0).speed(0.5)) {
-                                        game.headerOpacity = 0.0
                                     }
                                 }
                             }

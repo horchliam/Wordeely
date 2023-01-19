@@ -120,6 +120,9 @@ class GameController: ObservableObject {
     }
     
     init(width: Int = 5, height: Int = 1) {
+//        let domain = Bundle.main.bundleIdentifier!
+//        UserDefaults.standard.removePersistentDomain(forName: domain)
+//        UserDefaults.standard.synchronize()
         self.width = width
         self.height = height
         letters = Array(
@@ -128,7 +131,7 @@ class GameController: ObservableObject {
         )
         opacity = [0.0]
         scores = [(nil, nil)]
-        getWord()
+        getWord() {}
         if(difficulty == .Daily) {
             newDailyGame()
         } else {
@@ -338,7 +341,7 @@ class GameController: ObservableObject {
     }
     
     // Daily Game Controller stuff
-    func getWord() {
+    func getWord(_ callback: @escaping () -> ()) {
         guard let url = URL(string: "https://blogdeliam.com/api/Password12/wordeely") else { fatalError("Missing URL") }
         
         let urlRequest = URLRequest(url: url)
@@ -358,6 +361,7 @@ class GameController: ObservableObject {
                         let theWord = try JSONDecoder().decode(WordeelyResponse.self, from: data)
                         print("Word from server: " + theWord.word)
                         self.setDailyWord(word: theWord.word)
+                        callback()
                     } catch let error {
                         print("Error decoding: ", error)
                     }
